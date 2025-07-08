@@ -1,4 +1,5 @@
 package ViewArthur;
+import ViewLuidgi.ConsultaHistorico;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -253,12 +254,11 @@ public class TelaModalidades extends javax.swing.JFrame {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     /**

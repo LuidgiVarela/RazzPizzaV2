@@ -1,5 +1,8 @@
 package ViewArthur;
 
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+
 
 /**
  *
@@ -513,12 +516,11 @@ if (
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+       
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jTextFieldHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorarioActionPerformed

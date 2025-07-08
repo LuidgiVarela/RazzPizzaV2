@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingUtilities;
 import ModelArthur.Pagamento;
+import ViewLuidgi.ConsultaHistorico;
 
 
 
@@ -552,12 +553,11 @@ public class TelaCartao extends javax.swing.JFrame {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed

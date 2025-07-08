@@ -1,12 +1,7 @@
 package ViewArthur;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 /**
- *
  * @author arthu
  */
 import javax.swing.text.AbstractDocument;
@@ -16,7 +11,8 @@ import javax.swing.text.BadLocationException;
 import ModelArthur.Avaliacao;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
-
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
 
 
 
@@ -29,7 +25,7 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     public TelaAvaliacao() {
         initComponents();
         this.nomeCliente = nomeCliente;
-         this.emailCliente = emailCliente;
+        this.emailCliente = emailCliente;
          
         setSize(900,800);
         ((AbstractDocument) jTextAreaAvaliacao.getDocument()).setDocumentFilter(new DocumentFilter() {
@@ -303,12 +299,11 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
         
-        /*
-        código consulte seu histórico:
+       
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed

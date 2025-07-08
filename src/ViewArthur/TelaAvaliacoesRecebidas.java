@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import ViewLuidgi.ConsultaHistorico;
 
 
 /**
@@ -331,12 +332,11 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-        /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed

@@ -4,12 +4,18 @@ package ViewArthur;
  * @author arthu
  */
 
+import ModelArthur.Dinheiro;
+import ModelArthur.Pagamento;
+
+import ViewLuidgi.ConsultaPerfilCliente_back;
+import ViewLuidgi.ConsultaHistorico;
+
 import java.awt.event.KeyEvent;
 import java.awt.Color;
-import ModelArthur.Dinheiro;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import ModelArthur.Pagamento;
+
+
 
 
 public class TelaDinheiro extends javax.swing.JFrame {
@@ -316,12 +322,11 @@ public class TelaDinheiro extends javax.swing.JFrame {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+       
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     /**
