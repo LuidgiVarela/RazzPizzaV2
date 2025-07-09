@@ -11,7 +11,7 @@ package ModelArthur;
 public abstract class Categoria {
     private String nome;
     private double preco;
-    private int quantidade;
+    int quantidade;
 
     public Categoria(String nome, double preco) {
         this.nome = nome;
