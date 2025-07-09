@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 import java.awt.Window;
 import javax.swing.SwingUtilities;
+import java.util.Random;
 
 import ModelArthur.Avaliacao;
 import ModelArthur.SistemaAvaliacoes;
@@ -43,6 +44,14 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         this.cliente = cliente;
         this.cliente = clienteLogado;
         initComponents();
+        
+        if ("Delivery".equalsIgnoreCase(SessaoUsuario.getInstancia().getModalidadePedido())) {
+            String codigo = gerarCodigoEntrega();
+            jlabelCodigoEntrega.setText("Código de Entrega: " + codigo);
+            jlabelCodigoEntrega.setVisible(true);
+        } else {
+            jlabelCodigoEntrega.setVisible(false);
+        }
                  
         setSize(900,800);
         ((AbstractDocument) jTextAreaAvaliacao.getDocument()).setDocumentFilter(new DocumentFilter() {
@@ -98,6 +107,13 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     public Usuario getUsuarioLogado() {
         return this.clienteLogado;
     }
+    private String gerarCodigoEntrega() {
+        Random random = new Random();
+        int codigo = 100000 + random.nextInt(900000); // Gera código de 6 dígitos
+        return String.valueOf(codigo);
+    }
+
+    
 
 
     /**
@@ -120,12 +136,13 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jlabelCodigoEntrega = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButtonFinalizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaAvaliacao = new javax.swing.JTextArea();
         jLabelContador = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Logout");
@@ -224,8 +241,9 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
         jLabel9.setText(" 🙏 Obrigado por comprar conosco!");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
-        jLabel11.setText("🧾 Seu pedido foi processado com sucesso.");
+        jlabelCodigoEntrega.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
+        jlabelCodigoEntrega.setForeground(new java.awt.Color(123, 63, 0));
+        jlabelCodigoEntrega.setText("Código de entrega:");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
         jLabel12.setText("💬 Gostaria de deixar uma avaliação sobre sua experiência?");
@@ -254,6 +272,9 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         jLabelContador.setForeground(new java.awt.Color(153, 153, 153));
         jLabelContador.setText("0/300 ");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        jLabel13.setText("🧾 Seu pedido foi processado com sucesso.");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -264,23 +285,27 @@ public class TelaAvaliacao extends javax.swing.JFrame {
                         .addContainerGap(121, Short.MAX_VALUE)
                         .addComponent(jLabel9))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(291, 291, 291)
-                                .addComponent(jButtonFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButtonFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(115, 115, 115))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabelContador, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelContador, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlabelCodigoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(84, 84, 84))
         );
         jPanel4Layout.setVerticalGroup(
@@ -288,11 +313,13 @@ public class TelaAvaliacao extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlabelCodigoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -483,14 +510,15 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInicio;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelContador;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaAvaliacao;
+    private javax.swing.JLabel jlabelCodigoEntrega;
     private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }
