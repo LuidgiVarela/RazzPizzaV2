@@ -9,6 +9,22 @@ import ModelLuidgi.Usuario;
 import ViewLuidgi.ConsultaHistorico;
 import ViewLuidgi.ConsultaPerfilCliente_back;
 
+<<<<<<< HEAD
+=======
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 
 /**
  * @author arthu

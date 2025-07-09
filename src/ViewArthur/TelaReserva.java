@@ -36,10 +36,13 @@ public class TelaReserva extends javax.swing.JFrame {
      */
     public TelaReserva() {
         initComponents();
-        setSize(900,800);
         Font fonte = new Font("Segoe UI", Font.PLAIN, 18);
-
-        // Placeholder e restrições: campo Data (ex: 12/12/25)
+        aplicarPlaceholdersEMascaras();
+        
+    }
+    
+    private void aplicarPlaceholdersEMascaras(){
+    // Placeholder e restrições: campo Data (ex: 12/12/25)
         jTextFieldData.setText("12/12/25");
         jTextFieldData.setForeground(Color.GRAY);
         jTextFieldData.addFocusListener(new FocusAdapter() {
@@ -195,9 +198,10 @@ public class TelaReserva extends javax.swing.JFrame {
     
     // parte de aparecer o usuário no menu marrom
     public TelaReserva(Usuario usuario) {
-        this(); // Chama o construtor padrão
+        initComponents();
         this.clienteLogado = usuario;
         setUsuarioLogado(usuario);
+        aplicarPlaceholdersEMascaras();
     }
     
     public void setUsuarioLogado(Usuario usuario) {
@@ -207,11 +211,7 @@ public class TelaReserva extends javax.swing.JFrame {
         labelUsuarioLogado.setText("Usuário: " + nomeCurto);
         labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
     }
-    
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -462,7 +462,7 @@ public class TelaReserva extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -471,7 +471,7 @@ public class TelaReserva extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(186, 186, 186)
                     .addComponent(jLabel2)
-                    .addContainerGap(563, Short.MAX_VALUE)))
+                    .addContainerGap(615, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -484,44 +484,37 @@ public class TelaReserva extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarReservaActionPerformed
+        // Verificar se todos os campos estão preenchidos corretamente
+        String data = jTextFieldData.getText().trim();
+        String horario = jTextFieldHorario.getText().trim();
+        String nome = jTextFieldNome.getText().trim();
+        String pessoas = jTextFieldNumPessoas.getText().trim();
 
+        if (jTextFieldData.getText().trim().isEmpty() || jTextFieldData.getText().equals("12/12/25") ||
+            jTextFieldHorario.getText().trim().isEmpty() || jTextFieldHorario.getText().equals("19:30") ||
+            jTextFieldNome.getText().trim().isEmpty() || jTextFieldNome.getText().equals("Seu Nome") ||
+            jTextFieldNumPessoas.getText().trim().isEmpty() || jTextFieldNumPessoas.getText().equals("05")) {
 
-     // Verificar se todos os campos estão preenchidos corretamente
-    String data = jTextFieldData.getText().trim();
-    String horario = jTextFieldHorario.getText().trim();
-    String nome = jTextFieldNome.getText().trim();
-    String pessoas = jTextFieldNumPessoas.getText().trim();
+            JOptionPane.showMessageDialog(
+                this,
+                "Por favor, preencha todos os campos corretamente antes de confirmar a reserva.",
+                "Campos obrigatórios",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return; // Impede o prosseguimento
+        }
 
-   // Verificar se todos os campos estão preenchidos corretamente
-if (
-    jTextFieldData.getText().trim().isEmpty() || jTextFieldData.getText().equals("12/12/25") ||
-    jTextFieldHorario.getText().trim().isEmpty() || jTextFieldHorario.getText().equals("19:30") ||
-    jTextFieldNome.getText().trim().isEmpty() || jTextFieldNome.getText().equals("Seu Nome") ||
-    jTextFieldNumPessoas.getText().trim().isEmpty() || jTextFieldNumPessoas.getText().equals("05")
-) {
-    JOptionPane.showMessageDialog(
-        this,
-        "Por favor, preencha todos os campos corretamente antes de confirmar a reserva.",
-        "Campos obrigatórios",
-        JOptionPane.ERROR_MESSAGE
-    );
-    return; // Impede o prosseguimento
-    }
-
-    // Tudo certo, abre a tela de confirmação
-    TelaDesejaAgendarPedido agendar = new TelaDesejaAgendarPedido();
-    agendar.setVisible(true);
-    this.dispose();
-
+        // Tudo certo, abre a tela de confirmação com o usuário logado
+        TelaDesejaAgendarPedido agendar = new TelaDesejaAgendarPedido(clienteLogado);
+        agendar.setVisible(true);
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonConfirmarReservaActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

@@ -1,5 +1,7 @@
 package ViewLuidgi;
 
+import ModelArthur.SimuladorDeDados;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -150,7 +152,8 @@ public class SplashScreen extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
+        SimuladorDeDados.simular();
         java.awt.EventQueue.invokeLater(() -> {
             new SplashScreen().setVisible(true);
         });

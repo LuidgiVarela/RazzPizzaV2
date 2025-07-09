@@ -1,112 +1,71 @@
-
-package ViewArthur;
-
-import ModelArthur.Avaliacao;
-import ModelArthur.SistemaAvaliacoes;
-import ModelArthur.SimuladorDeDados;
-
-import ViewLuidgi.ConsultaHistorico;
-import ViewLuidgi.ConsultaPerfilCliente_back;
-import ModelLuidgi.Cliente;
-
-
-import javax.swing.table.DefaultTableModel;
-import java.util.Comparator;
-import java.util.List;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package ViewLuidgi;
 import javax.swing.JOptionPane;
-import java.time.format.DateTimeFormatter;
-
-
-
 import java.awt.Window;
 import javax.swing.SwingUtilities;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
-import ModelLuidgi.SessaoUsuario;
+
 import ModelLuidgi.Usuario;
+import ModelLuidgi.SessaoUsuario;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.Entregador;
-import ViewLuidgi.LoginCliente_back;
-import ViewLuidgi.LoginEntregador;
+import ModelArthur.SistemaAvaliacoes;
+import ModelArthur.Avaliacao;
+import ViewArthur.TelaPagamento;
 
 
 /**
  *
- * @author arthu
+ * @author luidgivarela
  */
-public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
+public class PedidosPendentes extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidosPendentes.class.getName());
+    private Entregador entregadorLogado;
 
-    private Usuario clienteLogado; 
     
     /**
-     * Creates new form TelaAvaliacoesRecebidas
+     * Creates new form PedidosPendentes
      */
-    public TelaAvaliacoesRecebidas() {
+    public PedidosPendentes() {
         initComponents();
-        preencherTabelaAvaliacoes(SistemaAvaliacoes.getTodasAvaliacoes());
+        setSize(900, 800);
+        setLocationRelativeTo(null);  
+        
+        DefaultTableModel model = (DefaultTableModel) JTableAvaliacoes.getModel();
 
-        // Aumenta altura do cabeçalho
-        JTableAvaliacoes.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 30));
+        model.addRow(new Object[]{"João", "Pizza Calabresa", "Asa Norte", "18:10", "Pendente"});
+        model.addRow(new Object[]{"Maria", "Pizza Portuguesa", "Taguatinga", "18:22", "Entregue"});
+        model.addRow(new Object[]{"Lucas", "Pizza 4 Queijos", "Sudoeste", "18:45", "Pendente"});
+        model.addRow(new Object[]{"Ana", "Pizza Frango com Catupiry", "Lago Sul", "19:05", "Entregue"});
+        model.addRow(new Object[]{"Carlos", "Pizza Marguerita", "Águas Claras", "19:30", "Pendente"});
+        model.addRow(new Object[]{"Fernanda", "Pizza Pepperoni", "Guará", "19:50", "Pendente"});
+        model.addRow(new Object[]{"Tiago", "Pizza Vegetariana", "Ceilândia", "20:10", "Pendente"});
+        model.addRow(new Object[]{"Bruna", "Pizza Napolitana", "Samambaia", "20:35", "Entregue"});
+        model.addRow(new Object[]{"Pedro", "Pizza Bacon com Cheddar", "Núcleo Bandeirante", "20:55", "Pendente"});
+        model.addRow(new Object[]{"Juliana", "Pizza Quatro Estações", "Plano Piloto", "21:05", "Pendente"});
+        model.addRow(new Object[]{"André", "Pizza de Strogonoff", "Cruzeiro", "21:30", "Entregue"});
+        model.addRow(new Object[]{"Paula", "Pizza Rúcula e Tomate Seco", "Lago Norte", "21:50", "Pendente"});
+        model.addRow(new Object[]{"Igor", "Pizza Bacon", "Paranoá", "22:15", "Entregue"});
+        model.addRow(new Object[]{"Larissa", "Pizza Doce", "Recanto das Emas", "22:40", "Pendente"});
+        model.addRow(new Object[]{"Henrique", "Pizza Baiana", "Sobradinho", "22:55", "Pendente"});
 
-        // Altera fonte do cabeçalho
-        JTableAvaliacoes.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
-
-        // Largura da coluna Email
-        JTableAvaliacoes.getColumnModel().getColumn(2).setPreferredWidth(200);
-
-
-        // Clique para ver detalhes
-        JTableAvaliacoes.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int linhaSelecionada = JTableAvaliacoes.getSelectedRow();
-                if (linhaSelecionada != -1) {
-                    String avaliacaoCompleta = JTableAvaliacoes.getValueAt(linhaSelecionada, 3).toString(); // Coluna da Avaliação
-                    String nomeCliente = JTableAvaliacoes.getValueAt(linhaSelecionada, 1).toString(); // Coluna do Cliente
-
-                    JOptionPane.showMessageDialog(
-                    null,
-                    "Cliente: " + nomeCliente + "\n\n" + avaliacaoCompleta,
-                    "Detalhes da Avaliação",
-                    JOptionPane.INFORMATION_MESSAGE
-                    );
-                }
-            }
-        });
     }
 
-    // Método que preenche a tabela com as avaliações
-    private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
-        DefaultTableModel modelo = (DefaultTableModel) JTableAvaliacoes.getModel();
-        modelo.setRowCount(0); // Limpa a tabela antes de preencher
-
-        for (Avaliacao a : avaliacoes) {
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            Object[] linha = {
-            a.getData().format(formato),
-            a.getCliente().getNome(),
-            a.getCliente().getEmail(),
-            a.getTexto()
-        };
-            modelo.addRow(linha);
-        }
-}
-
-    // Método que preenche a tabela com as avaliações
-    private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
-        DefaultTableModel modelo = (DefaultTableModel) JTableAvaliacoes.getModel();
-        modelo.setRowCount(0); // Limpa a tabela antes de preencher
-
-        for (Avaliacao a : avaliacoes) {
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            Object[] linha = {
-            a.getData().format(formato),
-            a.getCliente().getNome(),
-            a.getCliente().getEmail(),
-            a.getTexto()
-        };
-            modelo.addRow(linha);
-        }
-}
+    // parte de aparecer o usuário no menu marrom
+    public PedidosPendentes(Entregador entregador) {
+        this(); // chama o construtor padrão
+        this.entregadorLogado = entregador;
+        setUsuarioLogado(entregador);
+    }
 
     public void setUsuarioLogado(Usuario usuario) {
         String nomeCompleto = usuario.getNome();
@@ -117,8 +76,8 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
     }
     
     public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }     
+        return this.entregadorLogado;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,14 +88,12 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroupOrdenacao = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jButtonInicio = new javax.swing.JButton();
-        jButtonSair = new javax.swing.JButton();
-        jButtonConsultarPerfil = new javax.swing.JButton();
-        jButtonConsultarHistorico = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         labelUsuarioLogado = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -151,38 +108,36 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(123, 63, 0));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButtonInicio.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonInicio.setText("🍕 Início");
-        jButtonInicio.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(255, 193, 7));
+        jButton1.setText("🍕 Início");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInicioActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jButtonSair.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonSair.setText("👋 Sair");
-        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setBackground(new java.awt.Color(255, 193, 7));
+        jButton3.setText("👋 Sair");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSairActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        jButtonConsultarPerfil.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonConsultarPerfil.setText("👤Consulte Seu Perfil");
-        jButtonConsultarPerfil.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(255, 193, 7));
+        jButton6.setText("👤Consulte seu Perfil");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarPerfilActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
-        jButtonConsultarHistorico.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonConsultarHistorico.setText("🕓 Consulte seu Histórico");
-        jButtonConsultarHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarHistoricoActionPerformed(evt);
-            }
-        });
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Logout");
@@ -192,28 +147,21 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonInicio)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonConsultarHistorico)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConsultarPerfil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 584, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSair)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,13 +169,12 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInicio)
-                    .addComponent(jButtonSair)
-                    .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico)
-                    .addComponent(jButton2)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3)
+                    .addComponent(jButton6)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 248, 220));
@@ -235,16 +182,14 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
-        jLabel1.setText("📝 Avaliações Recebidas");
+        jLabel1.setText("🚚Pedidos Pendentes");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
         jLabel10.setText("[🔘] Ordenar por: ");
 
-        buttonGroupOrdenacao.add(jRadioButtonNome);
         jRadioButtonNome.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jRadioButtonNome.setText(" Nome (ordem alfabética)");
 
-        buttonGroupOrdenacao.add(jRadioButtonData);
         jRadioButtonData.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jRadioButtonData.setText("Data (recente)");
 
@@ -269,17 +214,14 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         JTableAvaliacoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JTableAvaliacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Data", "Cliente", "Email", "Avaliação"
+                "Cliente", "Pedido", "Endereço", "Horário do Pedido", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -317,23 +259,23 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
                                 .addComponent(jButtonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(60, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(204, 204, 204))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1088, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(330, 330, 330))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonNome)
@@ -346,7 +288,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
                     .addComponent(jButtonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(jLabel3)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -354,77 +296,55 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-
-        /*Codigo botao de inicio
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         LoginCliente_back telaLogin = new LoginCliente_back();
         telaLogin.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
-    }//GEN-LAST:event_jButtonInicioActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        // TODO add your handling code here:
-        //Código sair:
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    }//GEN-LAST:event_jButtonSairActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Usuario usuarioLogado = SessaoUsuario.getInstancia().getUsuarioLogado();
 
-    private void jButtonConsultarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPerfilActionPerformed
-        // TODO add your handling code here:
-
-        /*código consulte seu perfil:
-        ConsultaPerfil_back telaPerfil = new ConsultaPerfil_back();
-        telaPerfil.setVisible(true);
-        dispose(); // opcional
-        */
-
-    }//GEN-LAST:event_jButtonConsultarPerfilActionPerformed
-
-    private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
-        // TODO add your handling code here:
-        
-        ConsultaHistorico telaHistorico = new ConsultaHistorico();
-        telaHistorico.setVisible(true);
-        this.dispose(); // Fecha a tela atual
-        
-    }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
-
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-        // TODO add your handling code here:
-        new TelaPainelAdm().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-
-    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        // TODO add your handling code here:
-        List<Avaliacao> avaliacoes = SistemaAvaliacoes.getTodasAvaliacoes();
-
-        if (jRadioButtonNome.isSelected()) {
-            avaliacoes.sort(Comparator.comparing(Avaliacao::getNomeCliente));
-        } else if (jRadioButtonData.isSelected()) {
-            avaliacoes.sort(Comparator.comparing(Avaliacao::getData).reversed());
+        if (usuarioLogado == null) {
+            JOptionPane.showMessageDialog(this, "Usuário não está logado.");
+            return;
         }
 
-        preencherTabelaAvaliacoes(avaliacoes); 
-    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+        if (usuarioLogado instanceof Entregador) {
+            Entregador entregadorLogado = (Entregador) usuarioLogado;
+            ConsultaPerfilEntregador telaPerfil = new ConsultaPerfilEntregador(entregadorLogado);
+            telaPerfil.setVisible(true);
+            this.dispose();
+        } else if (usuarioLogado instanceof Cliente) {
+            Cliente clienteLogado = (Cliente) usuarioLogado;
+            ConsultaPerfilCliente_back telaPerfilCliente = new ConsultaPerfilCliente_back(clienteLogado);
+            telaPerfilCliente.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tipo de usuário não reconhecido.");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // 1. Pega o usuário antes de limpar a sessão
@@ -450,6 +370,42 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // TODO add your handling code here:
+        TelaPagamento pagamento = new TelaPagamento();
+        pagamento.setVisible(true);
+        this.dispose(); // Fecha a tela atual (TelaCartao)
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+    DefaultTableModel model = (DefaultTableModel) JTableAvaliacoes.getModel();
+
+    // Recolhe os dados da tabela
+    List<Object[]> linhas = new ArrayList<>();
+    for (int i = 0; i < model.getRowCount(); i++) {
+        Object[] linha = {
+            model.getValueAt(i, 0), // Cliente
+            model.getValueAt(i, 1), // Pedido
+            model.getValueAt(i, 2), // Endereço
+            model.getValueAt(i, 3)  // Data
+        };
+        linhas.add(linha);
+    }
+
+    // Ordena conforme o botão selecionado
+    if (jRadioButtonNome.isSelected()) {
+        linhas.sort(Comparator.comparing(l -> l[0].toString())); // Ordenar por nome (coluna 0)
+    } else if (jRadioButtonData.isSelected()) {
+        linhas.sort((l1, l2) -> l2[3].toString().compareTo(l1[3].toString())); // Ordenar por data (coluna 3), decrescente
+    }
+
+    // Limpa e reinsere as linhas ordenadas
+    model.setRowCount(0);
+    for (Object[] linha : linhas) {
+        model.addRow(linha);
+    }
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,38 +422,22 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAvaliacoesRecebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAvaliacoesRecebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAvaliacoesRecebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAvaliacoesRecebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
-        // Simula dados fictícios
-        SimuladorDeDados.simular();
-        
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAvaliacoesRecebidas().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new PedidosPendentes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTableAvaliacoes;
-    private javax.swing.ButtonGroup buttonGroupOrdenacao;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAtualizar;
-    private javax.swing.JButton jButtonConsultarHistorico;
-    private javax.swing.JButton jButtonConsultarPerfil;
-    private javax.swing.JButton jButtonInicio;
-    private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

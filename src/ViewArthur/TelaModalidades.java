@@ -5,6 +5,12 @@ import ViewLuidgi.ConsultaHistorico;
 import ViewLuidgi.ConsultaPerfilCliente_back;
 import ViewNikolle.PedidoP;
 
+<<<<<<< HEAD
+=======
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 
 /**
  *
@@ -20,7 +26,6 @@ public class TelaModalidades extends javax.swing.JFrame {
      */
     public TelaModalidades() {
         initComponents();
-        setSize(900,800);
         
     }
 
@@ -182,7 +187,12 @@ public class TelaModalidades extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(233, 295, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(285, 285, 285))
             .addGroup(jPanel2Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(105, 105, 105)
                 .addComponent(jButtonDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
@@ -197,10 +207,28 @@ public class TelaModalidades extends javax.swing.JFrame {
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addGap(183, 183, 183)
+                .addComponent(jButtonDelivery)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAgendarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(171, 171, 171))
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(143, 143, 143)
@@ -208,6 +236,19 @@ public class TelaModalidades extends javax.swing.JFrame {
                     .addComponent(jButtonAgendarReserva)
                     .addComponent(jButtonDelivery))
                 .addGap(261, 261, 261)
+=======
+                .addGap(130, 130, 130)
+                .addComponent(jLabel1)
+                .addGap(89, 89, 89)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAgendarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(173, 173, 173)
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 .addComponent(jLabel3)
                 .addGap(150, 150, 150))
         );
@@ -218,7 +259,11 @@ public class TelaModalidades extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(208, Short.MAX_VALUE)
+=======
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -226,7 +271,11 @@ public class TelaModalidades extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -264,19 +313,25 @@ public class TelaModalidades extends javax.swing.JFrame {
 
     private void jButtonAgendarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarReservaActionPerformed
         // TODO add your handling code here:
-        jButtonAgendarReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TelaReserva reserva = new TelaReserva();
-                reserva.setVisible(true);
-                dispose(); // Fecha a tela atual
-            }
-        });
+        // Cria uma nova instância da TelaReserva, passando o cliente logado como parâmetro
+        TelaReserva reserva = new TelaReserva(clienteLogado);
+
+        // Exibe a nova tela
+        reserva.setVisible(true);
+
+        // Fecha a tela atual (TelaModalidades)
+        dispose();
     }//GEN-LAST:event_jButtonAgendarReservaActionPerformed
 
     private void jButtonDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeliveryActionPerformed
+<<<<<<< HEAD
         PedidoP telaPedido = new PedidoP(clienteLogado);
         telaPedido.setVisible(true);
         this.dispose();
+=======
+         // Define a modalidade como "Delivery"
+        SessaoUsuario.getInstancia().setModalidadePedido("Delivery");
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
     }//GEN-LAST:event_jButtonDeliveryActionPerformed
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed

@@ -12,6 +12,13 @@ import ViewLuidgi.ConsultaHistorico;
 import ViewLuidgi.ConsultaPerfilCliente_back;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.SessaoUsuario;
+<<<<<<< HEAD
+=======
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
@@ -22,27 +29,18 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingUtilities;
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 import java.awt.Window;
-import javax.swing.SwingUtilities;
-
-import ModelLuidgi.SessaoUsuario;
-import ModelLuidgi.Usuario;
-import ModelLuidgi.Cliente;
-import ModelLuidgi.Entregador;
-import ViewLuidgi.LoginCliente_back;
-import ViewLuidgi.LoginEntregador;
-
-
-
-
 
 
 public class TelaCartao extends javax.swing.JFrame {
-
+    
     private Usuario clienteLogado; 
     
     /**
@@ -50,7 +48,24 @@ public class TelaCartao extends javax.swing.JFrame {
      */
     public TelaCartao() {
         initComponents();
+<<<<<<< HEAD
 
+=======
+         
+
+        // Agrupamento dos botões "Sim" e "Não"
+        ButtonGroup grupoSalvarCartao = new ButtonGroup();
+        grupoSalvarCartao.add(jRadioButtonSim);
+        grupoSalvarCartao.add(jRadioButtonNao);
+        jRadioButtonSim.setSelected(true);
+
+        //chamada do método
+        configurarCampos();
+        preencherCampos();
+    }
+    
+    private void configurarCampos(){
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
         // Preenchimento automático dos campos se houver um cartão salvo como padrão
     Cartao cartaoSalvo = Cartao.getCartaoPadrao();
 
@@ -62,6 +77,7 @@ public class TelaCartao extends javax.swing.JFrame {
         jComboBoxTipoCartao.setSelectedItem(cartaoSalvo.getTipo());
     }
 
+<<<<<<< HEAD
     // Configuração Campo Nome Titular
     jTextFieldNomeTitular.setText("Nome do Titular");
     jTextFieldNomeTitular.setForeground(Color.GRAY);
@@ -125,6 +141,79 @@ public class TelaCartao extends javax.swing.JFrame {
                 e.consume();
                 return;
             }
+=======
+        if (cartaoSalvo != null) {
+            jTextFieldNumeroCartao.setText(cartaoSalvo.getNumeroCartao());
+            jTextFieldValidade.setText(cartaoSalvo.getValidade());
+            jTextFieldCVV.setText(cartaoSalvo.getCodigoSeguranca());
+            jTextFieldNomeTitular.setText(cartaoSalvo.getNomeTitular());
+            jComboBoxTipoCartao.setSelectedItem(cartaoSalvo.getTipo());
+        }
+
+        // Configuração Campo Nome Titular
+        jTextFieldNomeTitular.setText("Nome do Titular");
+        jTextFieldNomeTitular.setForeground(Color.GRAY);
+        jTextFieldNomeTitular.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldNomeTitular.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if (jTextFieldNomeTitular.getText().equals("Nome do Titular")) {
+                    jTextFieldNomeTitular.setText("");
+                    jTextFieldNomeTitular.setForeground(Color.BLACK);
+                }
+            }
+
+            public void focusLost(FocusEvent e) {
+                if (jTextFieldNomeTitular.getText().isEmpty()) {
+                    jTextFieldNomeTitular.setForeground(Color.GRAY);
+                    jTextFieldNomeTitular.setText("Nome do Titular");
+                }
+            }
+        });
+
+        jTextFieldNomeTitular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); // bloqueia caracteres não-letras
+                } else if (jTextFieldNomeTitular.getText().length() >= 30) {
+                    evt.consume(); // bloqueia se exceder 30 caracteres
+                }
+            }
+        });
+
+        // Configuração Campo Número do Cartão
+        jTextFieldNumeroCartao.setText("1234 5678 9012 3456");
+        jTextFieldNumeroCartao.setForeground(Color.GRAY);
+        jTextFieldNumeroCartao.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldNumeroCartao.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (jTextFieldNumeroCartao.getText().equals("1234 5678 9012 3456")) {
+                    jTextFieldNumeroCartao.setText("");
+                    jTextFieldNumeroCartao.setForeground(Color.BLACK);
+                }
+            }
+
+            public void focusLost(FocusEvent e) {
+                if (jTextFieldNumeroCartao.getText().isEmpty()) {
+                    jTextFieldNumeroCartao.setForeground(Color.GRAY);
+                    jTextFieldNumeroCartao.setText("1234 5678 9012 3456");
+                }
+            }
+        });
+
+        jTextFieldNumeroCartao.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String text = jTextFieldNumeroCartao.getText().replace(" ", "");
+                char c = e.getKeyChar();
+
+                // Só permite número e impede ultrapassar 16 dígitos
+                if (!Character.isDigit(c) || text.length() >= 16) {
+                    e.consume();
+                    return;
+                }
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 
             // Insere espaços automaticamente
             SwingUtilities.invokeLater(() -> {
@@ -134,7 +223,26 @@ public class TelaCartao extends javax.swing.JFrame {
                     if (i > 0 && i % 4 == 0) {
                         formatted.append(" ");
                     }
+<<<<<<< HEAD
                     formatted.append(raw.charAt(i));
+=======
+                    jTextFieldNumeroCartao.setText(formatted.toString());
+                });
+
+                e.consume(); // evita digitação duplicada
+            }
+        });
+
+        // Configuração Campo Validade
+        jTextFieldValidade.setText("MM/AA");
+        jTextFieldValidade.setForeground(Color.GRAY);
+        jTextFieldValidade.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldValidade.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if (jTextFieldValidade.getText().equals("MM/AA")) {
+                    jTextFieldValidade.setText("");
+                    jTextFieldValidade.setForeground(Color.BLACK);
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 }
                 jTextFieldNumeroCartao.setText(formatted.toString());
             });
@@ -153,6 +261,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 jTextFieldValidade.setText("");
                 jTextFieldValidade.setForeground(Color.BLACK);
             }
+<<<<<<< HEAD
         }
 
         public void focusLost(FocusEvent e) {
@@ -171,9 +280,45 @@ public class TelaCartao extends javax.swing.JFrame {
 
             // Só aceita número e máximo 4 dígitos
             if (!Character.isDigit(c) || text.length() >= 4) {
+=======
+
+            public void focusLost(FocusEvent e) {
+                if (jTextFieldValidade.getText().isEmpty()) {
+                    jTextFieldValidade.setForeground(Color.GRAY);
+                    jTextFieldValidade.setText("MM/AA");
+                }
+            }
+        });
+
+        jTextFieldValidade.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String text = jTextFieldValidade.getText().replace("/", "");
+                char c = e.getKeyChar();
+
+                // Só aceita número e máximo 4 dígitos
+                if (!Character.isDigit(c) || text.length() >= 4) {
+                    e.consume();
+                    return;
+                }
+
+                SwingUtilities.invokeLater(() -> {
+                    String raw = jTextFieldValidade.getText().replace("/", "") + c;
+                    StringBuilder formatted = new StringBuilder();
+                    for (int i = 0; i < raw.length(); i++) {
+                        if (i == 2) {
+                            formatted.append("/");
+                        }
+                        formatted.append(raw.charAt(i));
+                    }
+                    jTextFieldValidade.setText(formatted.toString());
+                });
+
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 e.consume();
                 return;
             }
+<<<<<<< HEAD
 
             SwingUtilities.invokeLater(() -> {
                 String raw = jTextFieldValidade.getText().replace("/", "") + c;
@@ -183,6 +328,19 @@ public class TelaCartao extends javax.swing.JFrame {
                         formatted.append("/");
                     }
                     formatted.append(raw.charAt(i));
+=======
+        });
+
+        // Configuração Campo CVV
+        jTextFieldCVV.setText("123");
+        jTextFieldCVV.setForeground(Color.GRAY);
+        jTextFieldCVV.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldCVV.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if (jTextFieldCVV.getText().equals("123")) {
+                    jTextFieldCVV.setText("");
+                    jTextFieldCVV.setForeground(Color.BLACK);
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
                 }
                 jTextFieldValidade.setText(formatted.toString());
             });
@@ -201,6 +359,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 jTextFieldCVV.setText("");
                 jTextFieldCVV.setForeground(Color.BLACK);
             }
+<<<<<<< HEAD
         }
 
         public void focusLost(FocusEvent e) {
@@ -210,6 +369,21 @@ public class TelaCartao extends javax.swing.JFrame {
             }
         }
     });
+=======
+
+            public void focusLost(FocusEvent e) {
+                if (jTextFieldCVV.getText().isEmpty()) {
+                    jTextFieldCVV.setForeground(Color.GRAY);
+                    jTextFieldCVV.setText("123");
+                }
+            }
+        });
+
+        jTextFieldCVV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                String text = jTextFieldCVV.getText();
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
 
     jTextFieldCVV.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -219,6 +393,7 @@ public class TelaCartao extends javax.swing.JFrame {
             if (!Character.isDigit(c) || text.length() >= 3) {
                 evt.consume(); // só permite números e até 3 dígitos
             }
+<<<<<<< HEAD
         }
     });
 
@@ -250,14 +425,24 @@ public class TelaCartao extends javax.swing.JFrame {
     public void setUsuarioLogado(Usuario usuario) {
         String nomeCompleto = usuario.getNome();
         String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
-
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+=======
+        });
     }
     
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    } 
+    
+    
+    private void preencherCampos() {
+        Cartao cartaoSalvo = Cartao.getCartaoPadrao();
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
+
+        if (cartaoSalvo != null) {
+            jTextFieldNumeroCartao.setText(cartaoSalvo.getNumeroCartao());
+            jTextFieldValidade.setText(cartaoSalvo.getValidade());
+            jTextFieldCVV.setText(cartaoSalvo.getCodigoSeguranca());
+            jTextFieldNomeTitular.setText(cartaoSalvo.getNomeTitular());
+            jComboBoxTipoCartao.setSelectedItem(cartaoSalvo.getTipo());
+        }     
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -354,7 +539,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 444, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -484,7 +669,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(14, 145, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,7 +687,7 @@ public class TelaCartao extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButtonConfirmarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,15 +763,17 @@ public class TelaCartao extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -630,7 +817,10 @@ public class TelaCartao extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed
+<<<<<<< HEAD
         
+=======
+>>>>>>> 5b14b9a3d824ada69c6630eb8ee0ac44425b72e2
         //Captura os dados dos campos
         String numero = jTextFieldNumeroCartao.getText().replaceAll("[_\\s]", "");
         String validade = jTextFieldValidade.getText().replaceAll("[_\\s]", "");

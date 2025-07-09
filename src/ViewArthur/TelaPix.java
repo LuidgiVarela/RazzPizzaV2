@@ -8,6 +8,11 @@ import ViewLuidgi.ConsultaPerfilCliente_back;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.SessaoUsuario;
 
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.SessaoUsuario;
+
 /**
  * @author arthu
  */
