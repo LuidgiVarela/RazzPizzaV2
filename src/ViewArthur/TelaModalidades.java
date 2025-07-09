@@ -293,13 +293,14 @@ public class TelaModalidades extends javax.swing.JFrame {
 
     private void jButtonAgendarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarReservaActionPerformed
         // TODO add your handling code here:
-        jButtonAgendarReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TelaReserva reserva = new TelaReserva();
-                reserva.setVisible(true);
-                dispose(); // Fecha a tela atual
-            }
-        });
+    // Cria uma nova instância da TelaReserva, passando o cliente logado como parâmetro
+        TelaReserva reserva = new TelaReserva(clienteLogado);
+
+        // Exibe a nova tela
+        reserva.setVisible(true);
+
+        // Fecha a tela atual (TelaModalidades)
+        dispose();
     }//GEN-LAST:event_jButtonAgendarReservaActionPerformed
 
     private void jButtonDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeliveryActionPerformed

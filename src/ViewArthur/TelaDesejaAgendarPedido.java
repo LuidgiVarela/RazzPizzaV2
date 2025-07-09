@@ -295,9 +295,9 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonAgendarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarPedidoActionPerformed
-        // TODO add your handling code here:
-        //new TelaPedido().setVisible(true);
-        this.dispose();
+        TelaDesejaAgendarPedido tela = new TelaDesejaAgendarPedido(clienteLogado);
+        tela.setVisible(true);
+        dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonAgendarPedidoActionPerformed
 
     private void JbuttonSair2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbuttonSair2ActionPerformed

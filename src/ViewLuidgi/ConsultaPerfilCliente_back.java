@@ -110,7 +110,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         botaoEditarCEP = new javax.swing.JButton();
         botaoEditarEmail = new javax.swing.JButton();
         botaoEditarNumResidencia = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         jButton7.setBackground(new java.awt.Color(255, 193, 7));
         jButton7.setText("✅Salvar aterações");
@@ -413,14 +412,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         gridBagConstraints.insets = new java.awt.Insets(27, 12, 0, 0);
         jPanel4.add(botaoEditarNumResidencia, gridBagConstraints);
 
-        jButton5.setBackground(new java.awt.Color(255, 193, 7));
-        jButton5.setText("⬅Voltar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -432,17 +423,11 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
                 .addGap(457, 457, 457)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(393, 393, 393))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton5)
-                .addGap(68, 68, 68)
+                .addGap(97, 97, 97)
                 .addComponent(jLabel1)
                 .addGap(6, 6, 6)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -651,10 +636,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -674,7 +655,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

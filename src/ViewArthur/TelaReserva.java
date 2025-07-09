@@ -195,7 +195,7 @@ public class TelaReserva extends javax.swing.JFrame {
     
     // parte de aparecer o usuário no menu marrom
     public TelaReserva(Usuario usuario) {
-        this(); // Chama o construtor padrão
+        initComponents();
         this.clienteLogado = usuario;
         setUsuarioLogado(usuario);
     }
@@ -207,11 +207,7 @@ public class TelaReserva extends javax.swing.JFrame {
         labelUsuarioLogado.setText("Usuário: " + nomeCurto);
         labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
     }
-    
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -493,35 +489,30 @@ public class TelaReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarReservaActionPerformed
+        // Verificar se todos os campos estão preenchidos corretamente
+        String data = jTextFieldData.getText().trim();
+        String horario = jTextFieldHorario.getText().trim();
+        String nome = jTextFieldNome.getText().trim();
+        String pessoas = jTextFieldNumPessoas.getText().trim();
 
+        if (jTextFieldData.getText().trim().isEmpty() || jTextFieldData.getText().equals("12/12/25") ||
+            jTextFieldHorario.getText().trim().isEmpty() || jTextFieldHorario.getText().equals("19:30") ||
+            jTextFieldNome.getText().trim().isEmpty() || jTextFieldNome.getText().equals("Seu Nome") ||
+            jTextFieldNumPessoas.getText().trim().isEmpty() || jTextFieldNumPessoas.getText().equals("05")) {
 
-     // Verificar se todos os campos estão preenchidos corretamente
-    String data = jTextFieldData.getText().trim();
-    String horario = jTextFieldHorario.getText().trim();
-    String nome = jTextFieldNome.getText().trim();
-    String pessoas = jTextFieldNumPessoas.getText().trim();
+            JOptionPane.showMessageDialog(
+                this,
+                "Por favor, preencha todos os campos corretamente antes de confirmar a reserva.",
+                "Campos obrigatórios",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return; // Impede o prosseguimento
+        }
 
-   // Verificar se todos os campos estão preenchidos corretamente
-if (
-    jTextFieldData.getText().trim().isEmpty() || jTextFieldData.getText().equals("12/12/25") ||
-    jTextFieldHorario.getText().trim().isEmpty() || jTextFieldHorario.getText().equals("19:30") ||
-    jTextFieldNome.getText().trim().isEmpty() || jTextFieldNome.getText().equals("Seu Nome") ||
-    jTextFieldNumPessoas.getText().trim().isEmpty() || jTextFieldNumPessoas.getText().equals("05")
-) {
-    JOptionPane.showMessageDialog(
-        this,
-        "Por favor, preencha todos os campos corretamente antes de confirmar a reserva.",
-        "Campos obrigatórios",
-        JOptionPane.ERROR_MESSAGE
-    );
-    return; // Impede o prosseguimento
-    }
-
-    // Tudo certo, abre a tela de confirmação
-    TelaDesejaAgendarPedido agendar = new TelaDesejaAgendarPedido();
-    agendar.setVisible(true);
-    this.dispose();
-
+        // Tudo certo, abre a tela de confirmação com o usuário logado
+        TelaDesejaAgendarPedido agendar = new TelaDesejaAgendarPedido(clienteLogado);
+        agendar.setVisible(true);
+        this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonConfirmarReservaActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

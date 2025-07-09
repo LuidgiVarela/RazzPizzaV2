@@ -83,7 +83,7 @@ public class TelaPainelAdm extends javax.swing.JFrame {
         });
 
         labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setText("Adm:");
         labelUsuarioLogado.setOpaque(true);
         labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
 
