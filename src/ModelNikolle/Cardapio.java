@@ -17,7 +17,7 @@ public class Cardapio {
         bebidas = new ArrayList<>();
         sobremesas = new ArrayList<>();
 
-        // ➕ Adiciona PIZZAS ao cardápio
+        //adiciona pizza
         pizzas.add(new Pizza("Mussarela", 35.00, "Molho, mussarela e azeitona"));
         pizzas.add(new Pizza("Calabresa", 35.00, "Molho, mussarela, calabresa, cebola e orégano"));
         pizzas.add(new Pizza("Marguerita", 35.00, "Molho, mussarela, tomate, azeitona e orégano"));
@@ -26,7 +26,7 @@ public class Cardapio {
         pizzas.add(new Pizza("Frango", 35.00, "Molho, mussarela, tomate e azeitona"));
         pizzas.add(new Pizza("Quatro Queijos", 40.00, "Mussarela, parmesão, provolone e requeijão"));
 
-        // ➕ Adiciona BEBIDAS
+        //adiciona bebidas
         bebidas.add(new Bebida("Coca-Cola", 8.00));
         bebidas.add(new Bebida("Guaraná Antárctica", 8.00));
         bebidas.add(new Bebida("Franta", 7.00));
@@ -35,7 +35,7 @@ public class Cardapio {
         bebidas.add(new Bebida("Água Mineral", 4.00));
         bebidas.add(new Bebida("Água com Gás", 5.00));
 
-        // ➕ Adiciona SOBREMESAS
+        //adiciona sobremesa
         sobremesas.add(new Sobremesa("Pudim", 10.00));
         sobremesas.add(new Sobremesa("Mousse de Maracujá", 9.50));
         sobremesas.add(new Sobremesa("Sorvete", 7.00));

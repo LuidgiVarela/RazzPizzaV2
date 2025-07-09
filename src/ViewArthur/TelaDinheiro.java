@@ -9,6 +9,8 @@ import ModelArthur.Pagamento;
 
 import ViewLuidgi.ConsultaPerfilCliente_back;
 import ViewLuidgi.ConsultaHistorico;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.SessaoUsuario;
 
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -360,7 +362,8 @@ public class TelaDinheiro extends javax.swing.JFrame {
         Pagamento pagamento = new Dinheiro(100.00); // Instância da subclasse Dinheiro
         pagamento.confirmarPagamento();      // Chama o método sobrescrito com JOptionPane
         
-        TelaAvaliacao avaliacao = new TelaAvaliacao();
+        Cliente cliente = (Cliente) SessaoUsuario.getInstancia().getUsuarioLogado();
+        TelaAvaliacao avaliacao = new TelaAvaliacao(cliente);
         avaliacao.setVisible(true);
         this.dispose(); // Fecha a tela atual de pagamento
 

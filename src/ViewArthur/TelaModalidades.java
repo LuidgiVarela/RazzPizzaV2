@@ -1,21 +1,8 @@
 package ViewArthur;
-import java.awt.Window;
-import javax.swing.SwingUtilities;
-import javax.swing.JOptionPane;
 
-import ModelLuidgi.SessaoUsuario;
-import ModelLuidgi.Usuario;
-import ModelLuidgi.Cliente;
-import ModelLuidgi.Entregador;
-import ModelLuidgi.Usuario;
-import ViewLuidgi.LoginCliente_back;
-import ViewLuidgi.LoginEntregador;
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
 
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 /**
  *

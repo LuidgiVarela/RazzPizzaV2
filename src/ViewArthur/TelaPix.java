@@ -1,16 +1,12 @@
 package ViewArthur;
+
 import ModelArthur.Pix;
 import ModelArthur.Pagamento;
-import java.awt.Window;
-import javax.swing.SwingUtilities;
-import javax.swing.JOptionPane;
 
-import ModelLuidgi.SessaoUsuario;
-import ModelLuidgi.Usuario;
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
 import ModelLuidgi.Cliente;
-import ModelLuidgi.Entregador;
-import ViewLuidgi.LoginCliente_back;
-import ViewLuidgi.LoginEntregador;
+import ModelLuidgi.SessaoUsuario;
 
 /**
  * @author arthu
@@ -305,7 +301,8 @@ public class TelaPix extends javax.swing.JFrame {
         Pagamento pagamento = new Pix(100.0); // Instância da subclasse Pix
         pagamento.confirmarPagamento(); // Chama o método sobrescrito com JOptionPane
         
-        TelaAvaliacao avaliacao = new TelaAvaliacao();
+        Cliente cliente = (Cliente) SessaoUsuario.getInstancia().getUsuarioLogado();
+        TelaAvaliacao avaliacao = new TelaAvaliacao(cliente);
         avaliacao.setVisible(true);
         this.dispose(); // Fecha a tela atual de pagamento
     }//GEN-LAST:event_jButtonConfirmarPagamentoActionPerformed

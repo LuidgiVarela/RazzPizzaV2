@@ -4,25 +4,13 @@ import ModelArthur.Pagamento;
 import ModelArthur.Pix;
 import ModelArthur.Dinheiro;
 import ModelArthur.Cartao;
-import ViewLuidgi.ConsultaHistorico;
-
-import java.awt.Window;
-import javax.swing.SwingUtilities;
-
-import ModelLuidgi.SessaoUsuario;
 import ModelLuidgi.Usuario;
-import ModelLuidgi.Cliente;
-import ModelLuidgi.Entregador;
-import ViewLuidgi.LoginCliente_back;
-import ViewLuidgi.LoginEntregador;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+
 
 /**
- *
  * @author arthu
  */
 

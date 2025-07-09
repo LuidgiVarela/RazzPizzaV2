@@ -1,5 +1,7 @@
 package ModelLuidgi;
 
+import ModelArthur.Cartao;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -18,7 +20,7 @@ package ModelLuidgi;
 public class Cliente extends Usuario {
     private String cep;
     private String numero;
-    // private CartaoSalvo cartaoSalvo; 
+    private Cartao cartaoSalvo; 
 
     public Cliente(String nome, String email, String telefone, String cep, String senha, String numero) {
         super(nome, email, senha, telefone); // inicializa os atributos da superclasse
@@ -43,6 +45,14 @@ public class Cliente extends Usuario {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+    
+    public Cartao getCartaoSalvo() {
+        return cartaoSalvo;
+    }
+
+    public void setCartaoSalvo(Cartao cartaoSalvo) {
+        this.cartaoSalvo = cartaoSalvo;
     }
 
     @Override

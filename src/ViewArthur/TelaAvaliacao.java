@@ -8,9 +8,16 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import ModelArthur.Avaliacao;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
+
+import ModelArthur.Avaliacao;
+import ModelArthur.SistemaAvaliacoes;
+import ViewLuidgi.ConsultaHistorico;
+
+
+import ModelLuidgi.Cliente;
+import ModelLuidgi.SessaoUsuario;
 
 import java.awt.Window;
 import javax.swing.SwingUtilities;
@@ -24,18 +31,16 @@ import ViewLuidgi.LoginEntregador;
 
 
 public class TelaAvaliacao extends javax.swing.JFrame {
-    private String nomeCliente;
-    private String emailCliente;
-    private Usuario clienteLogado;
-
+    private Cliente cliente;
     /**
      * Creates new form TelaFinal
      */
-    public TelaAvaliacao() {
+    public TelaAvaliacao(Cliente cliente) {
+        this.cliente = cliente;
         initComponents();
-        this.nomeCliente = nomeCliente;
-        this.emailCliente = emailCliente;
+        
          
+        
         setSize(900,800);
         ((AbstractDocument) jTextAreaAvaliacao.getDocument()).setDocumentFilter(new DocumentFilter() {
             private final int MAX_CHARS = 300;
@@ -365,17 +370,25 @@ public class TelaAvaliacao extends javax.swing.JFrame {
 
     private void jButtonFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarActionPerformed
         // TODO add your handling code here:
-       String texto = jTextAreaAvaliacao.getText();
-
+        
+        String texto = jTextAreaAvaliacao.getText();
         if (!texto.isBlank()) {
-             Avaliacao avaliacao = new Avaliacao(nomeCliente, texto, emailCliente, LocalDate.now());
-             Avaliacao.setAvaliacaoSalvaGlobal(avaliacao);
-   
+            LocalDate data = LocalDate.now();
+
+            Avaliacao avaliacao = new Avaliacao(
+                cliente, // CORRETO: passa o objeto Cliente
+                texto,
+                data
+            );
+
+            Avaliacao.setAvaliacaoSalvaGlobal(avaliacao); // se ainda quiser usar isso
+            SistemaAvaliacoes.adicionarAvaliacao(avaliacao);
+
+            JOptionPane.showMessageDialog(this, "✅ Obrigado pela avaliação!");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "❗ Digite algo para avaliar.");
         }
-
-        JOptionPane.showMessageDialog(this, "Volte sempre!");
-
-        this.dispose(); // Fecha a tela de avaliação
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -459,7 +472,7 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAvaliacao().setVisible(true);
+                new TelaAvaliacao((Cliente) SessaoUsuario.getInstancia().getUsuarioLogado()).setVisible(true);
             }
         });
     }

@@ -11,10 +11,12 @@ package ModelArthur;
 public abstract class Categoria {
     private String nome;
     private double preco;
+    private int quantidade;
 
     public Categoria(String nome, double preco) {
         this.nome = nome;
         this.preco = preco;
+        this.quantidade = 0;
     }
 
     public String getNome() {
@@ -31,6 +33,23 @@ public abstract class Categoria {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+    
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    public void incrementar(){
+        this.quantidade+=1;
+    }
+    
+    public void decrementar(){
+        if(this.quantidade > 0) this.quantidade-=1;
+        
     }
 
     public abstract String getDescricaoCategoria();

@@ -10,12 +10,10 @@ package ModelArthur;
  */
 public class Pizza extends Categoria {
     private String ingredientes;
-    private int quantidade;
 
     public Pizza(String nome, double preco, String ingredientes) {
         super(nome, preco);
         this.ingredientes = ingredientes;
-        this.quantidade = 0; // começa com 0
     }
 
     public String getIngredientes() {
@@ -24,24 +22,6 @@ public class Pizza extends Categoria {
 
     public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public void incrementar() {
-        this.quantidade++;
-    }
-
-    public void decrementar() {
-        if (this.quantidade > 0) {
-            this.quantidade--;
-        }
     }
 
     @Override

@@ -1,15 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ViewArthur;
+
 import ModelArthur.Avaliacao;
 import ModelArthur.SistemaAvaliacoes;
+import ModelArthur.SimuladorDeDados;
+
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+import ModelLuidgi.Cliente;
+
+
 import javax.swing.table.DefaultTableModel;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import ViewLuidgi.ConsultaHistorico;
+import java.time.format.DateTimeFormatter;
+
+
 
 import java.awt.Window;
 import javax.swing.SwingUtilities;
@@ -35,6 +42,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
      */
     public TelaAvaliacoesRecebidas() {
         initComponents();
+        preencherTabelaAvaliacoes(SistemaAvaliacoes.getTodasAvaliacoes());
 
         // Aumenta altura do cabeçalho
         JTableAvaliacoes.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 30));
@@ -45,9 +53,6 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         // Largura da coluna Email
         JTableAvaliacoes.getColumnModel().getColumn(2).setPreferredWidth(200);
 
-        // Simula dados e preenche tabela
-        SistemaAvaliacoes.simularAvaliacoes();
-        preencherTabelaAvaliacoes(SistemaAvaliacoes.getTodasAvaliacoes());
 
         // Clique para ver detalhes
         JTableAvaliacoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -85,12 +90,22 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         }
     }
 
-    // parte de aparecer o usuário no menu marrom
-    public TelaAvaliacoesRecebidas(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
+    // Método que preenche a tabela com as avaliações
+    private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
+        DefaultTableModel modelo = (DefaultTableModel) JTableAvaliacoes.getModel();
+        modelo.setRowCount(0); // Limpa a tabela antes de preencher
+
+        for (Avaliacao a : avaliacoes) {
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            Object[] linha = {
+            a.getData().format(formato),
+            a.getCliente().getNome(),
+            a.getCliente().getEmail(),
+            a.getTexto()
+        };
+            modelo.addRow(linha);
+        }
+}
 
     public void setUsuarioLogado(Usuario usuario) {
         String nomeCompleto = usuario.getNome();
@@ -461,7 +476,11 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaAvaliacoesRecebidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        
+        // Simula dados fictícios
+        SimuladorDeDados.simular();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

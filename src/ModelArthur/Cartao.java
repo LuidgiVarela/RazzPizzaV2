@@ -33,7 +33,7 @@ public class Cartao extends Pagamento {
     @Override
     public void confirmarPagamento() {
         JOptionPane.showMessageDialog(null, 
-            "💳 Pagamento com cartão confirmado!\nTotal: R$ " + calcularValorFinal(), 
+            "Pagamento com cartão confirmado!\nTotal: R$ " + calcularValorFinal(), 
             "Confirmação", 
             JOptionPane.INFORMATION_MESSAGE);
     }
