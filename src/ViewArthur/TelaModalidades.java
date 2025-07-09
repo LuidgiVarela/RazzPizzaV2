@@ -14,6 +14,7 @@ import ViewLuidgi.LoginEntregador;
 
 import ViewLuidgi.ConsultaHistorico;
 import ViewLuidgi.ConsultaPerfilCliente_back;
+import ViewNikolle.PedidoP;
 
 
 /**
@@ -75,8 +76,6 @@ public class TelaModalidades extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButtonAgendarReserva = new javax.swing.JButton();
         jButtonDelivery = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,8 +167,8 @@ public class TelaModalidades extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jButtonAgendarReserva.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonAgendarReserva.setFont(new java.awt.Font("Segoe UI Emoji", 0, 48)); // NOI18N
-        jButtonAgendarReserva.setText("🍽️");
+        jButtonAgendarReserva.setFont(new java.awt.Font("Segoe UI Emoji", 0, 36)); // NOI18N
+        jButtonAgendarReserva.setText("🍽️Agendar Reserva");
         jButtonAgendarReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jButtonAgendarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,8 +177,8 @@ public class TelaModalidades extends javax.swing.JFrame {
         });
 
         jButtonDelivery.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonDelivery.setFont(new java.awt.Font("Segoe UI Emoji", 0, 48)); // NOI18N
-        jButtonDelivery.setText("🚚🍕 ");
+        jButtonDelivery.setFont(new java.awt.Font("Segoe UI Emoji", 0, 36)); // NOI18N
+        jButtonDelivery.setText("🚚🍕 Delivery");
         jButtonDelivery.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jButtonDelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,50 +186,34 @@ public class TelaModalidades extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("Agendar Reserva");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setText("Delivery");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(233, 295, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(285, 285, 285))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jButtonDelivery)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAgendarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(171, 171, 171))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jButtonDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(166, 166, 166)
+                        .addComponent(jButtonAgendarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
+                .addGap(144, 144, 144)
                 .addComponent(jLabel1)
-                .addGap(89, 89, 89)
+                .addGap(140, 140, 140)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAgendarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonDelivery)
+                    .addComponent(jButtonAgendarReserva))
                 .addGap(173, 173, 173)
                 .addComponent(jLabel3)
                 .addContainerGap(150, Short.MAX_VALUE))
@@ -301,6 +284,11 @@ public class TelaModalidades extends javax.swing.JFrame {
     private void jButtonDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeliveryActionPerformed
          // Define a modalidade como "Delivery"
         SessaoUsuario.getInstancia().setModalidadePedido("Delivery");
+        
+        PedidoP telaPedido = new PedidoP(clienteLogado);
+        telaPedido.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButtonDeliveryActionPerformed
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
@@ -383,9 +371,7 @@ public class TelaModalidades extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInicio;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelUsuarioLogado;
