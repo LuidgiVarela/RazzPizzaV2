@@ -13,6 +13,8 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JFormattedTextField;
 import java.text.ParseException;
 import java.awt.Font;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author luidgivarela
@@ -69,6 +71,7 @@ public class ConsultaPerfilEntregador extends javax.swing.JFrame implements Usua
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         labelUsuarioLogado = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -118,6 +121,14 @@ public class ConsultaPerfilEntregador extends javax.swing.JFrame implements Usua
         labelUsuarioLogado.setOpaque(true);
         labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,10 +136,12 @@ public class ConsultaPerfilEntregador extends javax.swing.JFrame implements Usua
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
                 .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -141,7 +154,8 @@ public class ConsultaPerfilEntregador extends javax.swing.JFrame implements Usua
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(jButton6)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -415,6 +429,30 @@ Usuario usuarioLogado = SessaoUsuario.getInstancia().getUsuarioLogado();
     this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -435,6 +473,7 @@ Usuario usuarioLogado = SessaoUsuario.getInstancia().getUsuarioLogado();
     private javax.swing.JLabel campoNome;
     private javax.swing.JLabel campoTelefone;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;

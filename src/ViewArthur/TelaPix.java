@@ -1,6 +1,16 @@
 package ViewArthur;
 import ModelArthur.Pix;
 import ModelArthur.Pagamento;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
+
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
 
 /**
  * @author arthu
@@ -8,21 +18,43 @@ import ModelArthur.Pagamento;
 
 public class TelaPix extends javax.swing.JFrame {
 
+    private Usuario clienteLogado;
+    
     /**
      * Creates new form Pix
      */
-     public TelaPix(double valorOriginal) {
-     initComponents();
+    public TelaPix(double valorOriginal) {
+        initComponents();
 
-     Pix pagamento = new Pix(valorOriginal);
-     double valorFinal = pagamento.calcularValorFinal();
+        Pix pagamento = new Pix(valorOriginal);
+        double valorFinal = pagamento.calcularValorFinal();
 
-     String texto = String.format("Total a pagar: R$%.2f (15%% de desconto)", valorFinal);
-     jLabelValor.setText(texto);
-}
-     public TelaPix() {
+        String texto = String.format("Total a pagar: R$%.2f (15%% de desconto)", valorFinal);
+        jLabelValor.setText(texto);
+    }
+   
+    public TelaPix() {
         this(0.0); // valor padrão
-}
+    }
+
+    // parte de aparecer o usuário no menu marrom
+    public TelaPix(Usuario usuario) {
+        this(); // chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
+
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
+
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
+    }
 
 
     /**
@@ -39,6 +71,8 @@ public class TelaPix extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -84,6 +118,19 @@ public class TelaPix extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -91,10 +138,14 @@ public class TelaPix extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 572, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -107,7 +158,9 @@ public class TelaPix extends javax.swing.JFrame {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton2)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -164,7 +217,7 @@ public class TelaPix extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(110, 110, 110)
@@ -186,7 +239,7 @@ public class TelaPix extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(293, 293, 293)
@@ -274,6 +327,30 @@ public class TelaPix extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +388,7 @@ public class TelaPix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonConfirmarPagamento;
     private javax.swing.JButton jButtonConsultarHistorico;
     private javax.swing.JButton jButtonConsultarPerfil;
@@ -323,6 +401,7 @@ public class TelaPix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelValor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JLabel lblTotal;
     // End of variables declaration//GEN-END:variables
 }

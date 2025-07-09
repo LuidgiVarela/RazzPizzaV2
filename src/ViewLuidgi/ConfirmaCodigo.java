@@ -4,7 +4,14 @@
  */
 package ViewLuidgi;
 import ModelLuidgi.Entregador;
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Entregador;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Usuario;
 import javax.swing.JOptionPane;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -50,6 +57,7 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         labelUsuarioLogado = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -92,6 +100,14 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 0, 0));
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout campoTelefoneLayout = new javax.swing.GroupLayout(campoTelefone);
         campoTelefone.setLayout(campoTelefoneLayout);
         campoTelefoneLayout.setHorizontalGroup(
@@ -99,10 +115,12 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
             .addGroup(campoTelefoneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
                 .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -115,7 +133,8 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jButton4))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -251,6 +270,30 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // 1. Pega o usuário da sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton4);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +324,7 @@ public class ConfirmaCodigo extends javax.swing.JFrame {
     private javax.swing.JPanel campoTelefone;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;

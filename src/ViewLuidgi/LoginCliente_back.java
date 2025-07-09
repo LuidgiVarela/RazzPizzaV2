@@ -331,14 +331,21 @@ public class LoginCliente_back extends javax.swing.JFrame {
             return; // encerra aqui se campos estiverem vazios
         }
 
+        System.out.println("=== Lista de usuários cadastrados no momento do login ===");
+        for (Usuario uTemp : BancoUsuarios.getListaUsuarios()) {
+            System.out.println("Email: " + uTemp.getEmail() + ", Senha: " + uTemp.getSenha());
+        }
+        System.out.println("=========================================================");
+        
         Usuario u = BancoUsuarios.buscarPorEmail(emailDigitado);
 
         if (u != null && u.getSenha().equals(senhaDigitada)) {
             if (u instanceof Cliente) {
                 Cliente cliente = (Cliente) u;
 
-                JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
+                SessaoUsuario.getInstancia().setUsuarioLogado(cliente); // << LINHA ESSENCIAL
 
+                JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
                 ConsultaPerfilCliente_back telaPerfil = new ConsultaPerfilCliente_back(cliente);
                 telaPerfil.setVisible(true);
                 this.dispose(); // Fecha a tela de login
