@@ -399,9 +399,8 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        TelaPagamento pagamento = new TelaPagamento();
-        pagamento.setVisible(true);
-        this.dispose(); // Fecha a tela atual (TelaCartao)
+        new TelaPainelAdm().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
