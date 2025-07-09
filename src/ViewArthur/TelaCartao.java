@@ -38,7 +38,20 @@ public class TelaCartao extends javax.swing.JFrame {
      */
     public TelaCartao() {
         initComponents();
-                   
+         
+
+        // Agrupamento dos botões "Sim" e "Não"
+        ButtonGroup grupoSalvarCartao = new ButtonGroup();
+        grupoSalvarCartao.add(jRadioButtonSim);
+        grupoSalvarCartao.add(jRadioButtonNao);
+        jRadioButtonSim.setSelected(true);
+
+        //chamada do método
+        configurarCampos();
+        preencherCampos();
+    }
+    
+    private void configurarCampos(){
         // Preenchimento automático dos campos se houver um cartão salvo como padrão
         Cartao cartaoSalvo = Cartao.getCartaoPadrao();
 
@@ -209,15 +222,6 @@ public class TelaCartao extends javax.swing.JFrame {
                 }
             }
         });
-
-        // Agrupamento dos botões "Sim" e "Não"
-        ButtonGroup grupoSalvarCartao = new ButtonGroup();
-        grupoSalvarCartao.add(jRadioButtonSim);
-        grupoSalvarCartao.add(jRadioButtonNao);
-        jRadioButtonSim.setSelected(true);
-
-        //chamada do método
-        preencherCampos();
     }
     
     

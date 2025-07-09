@@ -21,8 +21,6 @@
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ModelLuidgi/Usuario.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/ConsultaHistorico.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ModelArthur/Bebida.java</file>
-            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewArthur/TelaPainelAdm.java</file>
-            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/ConfirmaCodigo.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/SplashScreen.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ModelLuidgi/SessaoUsuario.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ModelLuidgi/UsuarioLogado.java</file>
@@ -35,6 +33,14 @@
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ModelArthur/Pix.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/LoginCliente_back.java</file>
             <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/LoginAdministrador.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/PedidosPendentes.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/LoginEntregador.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/ListaUsuarios.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/ConsultaPerfilEntregador.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/ConsultaPerfilCliente_back.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/CadastroEntregador.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewLuidgi/CadastroCliente_back.java</file>
+            <file>file:/C:/Users/arthu/Documents/UnB/TP1/RazzPizzaMerge1/src/ViewArthur/TelaPainelAdm.java</file>
         </group>
     </open-files>
 </project-private>
