@@ -1,4 +1,5 @@
 package ViewArthur;
+
 import ModelArthur.Pagamento;
 import ModelArthur.Pix;
 import ModelArthur.Dinheiro;
@@ -18,9 +19,10 @@ import ViewLuidgi.LoginEntregador;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
 
 /**
- *
  * @author arthu
  */
 
@@ -319,12 +321,11 @@ public class TelaPagamento extends javax.swing.JFrame {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+       
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonProsseguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProsseguirActionPerformed

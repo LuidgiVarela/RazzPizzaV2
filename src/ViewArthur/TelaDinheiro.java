@@ -4,12 +4,20 @@ package ViewArthur;
  * @author arthu
  */
 
+import ModelArthur.Dinheiro;
+import ModelArthur.Pagamento;
+
+import ViewLuidgi.ConsultaPerfilCliente_back;
+import ViewLuidgi.ConsultaHistorico;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.SessaoUsuario;
+
 import java.awt.event.KeyEvent;
 import java.awt.Color;
-import ModelArthur.Dinheiro;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import ModelArthur.Pagamento;
+
+
 
 import java.awt.Window;
 import javax.swing.SwingUtilities;
@@ -354,7 +362,8 @@ public class TelaDinheiro extends javax.swing.JFrame {
         Pagamento pagamento = new Dinheiro(100.00); // Instância da subclasse Dinheiro
         pagamento.confirmarPagamento();      // Chama o método sobrescrito com JOptionPane
         
-        TelaAvaliacao avaliacao = new TelaAvaliacao();
+        Cliente cliente = (Cliente) SessaoUsuario.getInstancia().getUsuarioLogado();
+        TelaAvaliacao avaliacao = new TelaAvaliacao(cliente);
         avaliacao.setVisible(true);
         this.dispose(); // Fecha a tela atual de pagamento
 
@@ -369,12 +378,11 @@ public class TelaDinheiro extends javax.swing.JFrame {
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+       
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

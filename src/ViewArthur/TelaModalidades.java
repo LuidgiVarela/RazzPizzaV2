@@ -12,10 +12,9 @@ import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
 
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import ViewLuidgi.ConsultaHistorico;
+import ViewLuidgi.ConsultaPerfilCliente_back;
+
 
 /**
  *
@@ -303,18 +302,19 @@ public class TelaModalidades extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgendarReservaActionPerformed
 
     private void jButtonDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeliveryActionPerformed
-        // TODO add your handling code here:
-
+        TelaAvaliacoesRecebidas tela = new TelaAvaliacoesRecebidas();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        dispose(); // ou this.dispose();
     }//GEN-LAST:event_jButtonDeliveryActionPerformed
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
         // TODO add your handling code here:
-         /*
-        código consulte seu histórico:
+        
         ConsultaHistorico telaHistorico = new ConsultaHistorico();
         telaHistorico.setVisible(true);
         this.dispose(); // Fecha a tela atual
-        */
+        
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
