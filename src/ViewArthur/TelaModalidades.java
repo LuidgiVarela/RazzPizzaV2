@@ -303,10 +303,8 @@ public class TelaModalidades extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgendarReservaActionPerformed
 
     private void jButtonDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeliveryActionPerformed
-        TelaAvaliacoesRecebidas tela = new TelaAvaliacoesRecebidas();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        dispose(); // ou this.dispose();
+         // Define a modalidade como "Delivery"
+        SessaoUsuario.getInstancia().setModalidadePedido("Delivery");
     }//GEN-LAST:event_jButtonDeliveryActionPerformed
 
     private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
