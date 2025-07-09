@@ -13,6 +13,9 @@ import ModelLuidgi.BancoUsuarios;
 import ModelLuidgi.Usuario;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.SessaoUsuario;
+
+import ViewArthur.TelaModalidades;
+
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
@@ -325,30 +328,25 @@ public class LoginCliente_back extends javax.swing.JFrame {
         String emailDigitado = campoEmail.getText();
         String senhaDigitada = campoSenha.getText();
 
-        // Verificação de campos vazios
         if (emailDigitado.trim().isEmpty() || senhaDigitada.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
-            return; // encerra aqui se campos estiverem vazios
+            return;
         }
 
-        System.out.println("=== Lista de usuários cadastrados no momento do login ===");
-        for (Usuario uTemp : BancoUsuarios.getListaUsuarios()) {
-            System.out.println("Email: " + uTemp.getEmail() + ", Senha: " + uTemp.getSenha());
-        }
-        System.out.println("=========================================================");
-        
         Usuario u = BancoUsuarios.buscarPorEmail(emailDigitado);
 
         if (u != null && u.getSenha().equals(senhaDigitada)) {
             if (u instanceof Cliente) {
                 Cliente cliente = (Cliente) u;
 
-                SessaoUsuario.getInstancia().setUsuarioLogado(cliente); // << LINHA ESSENCIAL
+                SessaoUsuario.getInstancia().setUsuarioLogado(cliente);
 
                 JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-                ConsultaPerfilCliente_back telaPerfil = new ConsultaPerfilCliente_back(cliente);
-                telaPerfil.setVisible(true);
-                this.dispose(); // Fecha a tela de login
+
+                TelaModalidades telaMod = new TelaModalidades(cliente);
+                telaMod.setVisible(true);
+                this.dispose();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Este usuário não é um cliente.");
             }

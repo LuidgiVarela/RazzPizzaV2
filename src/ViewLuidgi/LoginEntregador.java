@@ -289,18 +289,17 @@ public class LoginEntregador extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(null, "Login do entregador realizado com sucesso!");
 
-                    ConfirmaCodigo telaCodigo = new ConfirmaCodigo(entregador);
-                    telaCodigo.setVisible(true);
-                    this.dispose();
+                    // Abre a tela PedidosPendentes e envia o entregador logado
+                    PedidosPendentes telaPedidos = new PedidosPendentes(entregador);
+                    telaPedidos.setVisible(true);
+                    this.dispose(); // fecha a tela de login
                 } else {
                     JOptionPane.showMessageDialog(null, "Este usuário não é um entregador.");
                 }
             } else {
-                // Senha incorreta
                 JOptionPane.showMessageDialog(null, "Senha incorreta!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            // Usuário não encontrado
             JOptionPane.showMessageDialog(null, "E-mail não cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
