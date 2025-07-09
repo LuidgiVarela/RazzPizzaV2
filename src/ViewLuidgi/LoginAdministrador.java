@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ViewLuidgi;
+import ViewArthur.TelaPainelAdm;
 import javax.swing.JOptionPane;
 
 /**
@@ -228,8 +229,11 @@ public class LoginAdministrador extends javax.swing.JFrame {
 
         if (loginValido) {
             JOptionPane.showMessageDialog(null, "Login de administrador realizado com sucesso!");
-
-            this.dispose(); // fecha a tela de login
+            TelaPainelAdm tela = new TelaPainelAdm();
+            tela.setVisible(true);
+            tela.setLocationRelativeTo(null);
+            dispose(); 
+            
         } else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.");
         }
