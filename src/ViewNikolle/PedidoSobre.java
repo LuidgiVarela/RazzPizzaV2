@@ -1,6 +1,7 @@
 package ViewNikolle;
 
 import ModelArthur.Sobremesa;
+import ModelLuidgi.Usuario;
 import ModelNikolle.Cardapio;
 import ModelNikolle.Pedido;
 import ViewArthur.TelaPagamento;
@@ -10,12 +11,14 @@ public class PedidoSobre extends javax.swing.JFrame {
     
     private final Cardapio cardapio;
     private final Pedido pedido;
+    private final Usuario cliente;
     
-    public PedidoSobre(Pedido pedido) {
+    public PedidoSobre(Usuario cliente, Pedido pedido) {
         initComponents();
         
         cardapio = new Cardapio();
         this.pedido = pedido;
+        this.cliente = cliente;
 
         if (cardapio.getSobremesas().size() <= 3) {
             Sobremesa sobremesa1 = cardapio.getSobremesas().get(0);

@@ -339,7 +339,7 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         // Agora cria a tela passando o cliente como parâmetro
         ConsultaPerfilCliente_back telaPerfil = new ConsultaPerfilCliente_back(clienteLogado);
         telaPerfil.setVisible(true);
-        dispose(); // fecha a tela atual (opcional)
+        this.dispose(); // fecha a tela atual (opcional)
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed

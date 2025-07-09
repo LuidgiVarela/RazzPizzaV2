@@ -3,16 +3,19 @@ package ViewNikolle;
 import ModelNikolle.Cardapio;
 import ModelNikolle.Pedido;
 import ModelArthur.Pizza;
+import ModelLuidgi.Usuario;
 
 public class PedidoP extends javax.swing.JFrame {
 
     private final Cardapio cardapio;
     private final Pedido pedido = new Pedido();
+    private final Usuario cliente;
     
-    public PedidoP() {
+    public PedidoP(Usuario usuario) {
         initComponents();
 
         cardapio = new Cardapio();
+        this.cliente = usuario;
         
         if (cardapio.getPizzas().size() <= 7) {
             Pizza pizza1 = cardapio.getPizzas().get(0);
@@ -52,6 +55,10 @@ public class PedidoP extends javax.swing.JFrame {
             jLabel14.setText(pizza7.getIngredientes());
             jTextField7.setText(String.valueOf(pizza7.getQuantidade()));
             }
+    }
+
+    private PedidoP() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -648,7 +655,7 @@ public class PedidoP extends javax.swing.JFrame {
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         this.dispose();
-        PedidoRefri telaPedido = new PedidoRefri(pedido);
+        PedidoRefri telaPedido = new PedidoRefri(cliente, pedido);
         telaPedido.setVisible(true);
     }//GEN-LAST:event_jButton17ActionPerformed
     

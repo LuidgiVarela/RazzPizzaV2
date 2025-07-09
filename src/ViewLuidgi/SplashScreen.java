@@ -50,7 +50,7 @@ public class SplashScreen extends javax.swing.JFrame {
     
     private void abrirLogin() {
         new LoginCliente_back().setVisible(true);
-        dispose(); // fecha splash
+        this.dispose(); // fecha splash
     }
 
     /**

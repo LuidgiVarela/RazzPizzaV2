@@ -1,19 +1,23 @@
 package ViewNikolle;
 
 import ModelArthur.Bebida;
+import ModelLuidgi.Usuario;
 import ModelNikolle.Cardapio;
 import ModelNikolle.Pedido;
 
 public class PedidoRefri extends javax.swing.JFrame {
 
     private final Cardapio cardapio;
-    private final Pedido pedido;
+    private final Pedido pedido;    
+    private final Usuario cliente;
 
-    public PedidoRefri(Pedido pedido) {
+
+    public PedidoRefri(Usuario cliente, Pedido pedido) {
         initComponents();
 
         cardapio = new Cardapio();
         this.pedido = pedido;
+        this.cliente = cliente;
         
         if (cardapio.getBebidas().size() <= 7) {
             Bebida bebida1 = cardapio.getBebidas().get(0);
@@ -590,7 +594,7 @@ public class PedidoRefri extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         //botão de PRÓXIMO
-        PedidoSobre telaSobre = new PedidoSobre(pedido);
+        PedidoSobre telaSobre = new PedidoSobre(cliente, pedido);
         telaSobre.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton16ActionPerformed

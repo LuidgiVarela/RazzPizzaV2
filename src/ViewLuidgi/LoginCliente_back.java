@@ -13,6 +13,7 @@ import ModelLuidgi.BancoUsuarios;
 import ModelLuidgi.Usuario;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.SessaoUsuario;
+import ViewArthur.TelaModalidades;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
@@ -346,7 +347,7 @@ public class LoginCliente_back extends javax.swing.JFrame {
                 SessaoUsuario.getInstancia().setUsuarioLogado(cliente); // << LINHA ESSENCIAL
 
                 JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-                ConsultaPerfilCliente_back telaPerfil = new ConsultaPerfilCliente_back(cliente);
+                TelaModalidades telaPerfil = new TelaModalidades(cliente);
                 telaPerfil.setVisible(true);
                 this.dispose(); // Fecha a tela de login
             } else {
