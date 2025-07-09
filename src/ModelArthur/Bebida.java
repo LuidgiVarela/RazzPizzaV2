@@ -9,6 +9,10 @@ package ModelArthur;
  * @author arthu
  */
 public class Bebida extends Categoria {
+
+    public static Object get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public Bebida(String nome, double preco) {
         super(nome, preco);
     }
