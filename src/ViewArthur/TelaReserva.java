@@ -37,8 +37,12 @@ public class TelaReserva extends javax.swing.JFrame {
     public TelaReserva() {
         initComponents();
         Font fonte = new Font("Segoe UI", Font.PLAIN, 18);
-
-        // Placeholder e restrições: campo Data (ex: 12/12/25)
+        aplicarPlaceholdersEMascaras();
+        
+    }
+    
+    private void aplicarPlaceholdersEMascaras(){
+    // Placeholder e restrições: campo Data (ex: 12/12/25)
         jTextFieldData.setText("12/12/25");
         jTextFieldData.setForeground(Color.GRAY);
         jTextFieldData.addFocusListener(new FocusAdapter() {
@@ -197,6 +201,7 @@ public class TelaReserva extends javax.swing.JFrame {
         initComponents();
         this.clienteLogado = usuario;
         setUsuarioLogado(usuario);
+        aplicarPlaceholdersEMascaras();
     }
     
     public void setUsuarioLogado(Usuario usuario) {
