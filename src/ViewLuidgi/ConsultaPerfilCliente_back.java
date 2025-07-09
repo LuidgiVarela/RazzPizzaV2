@@ -22,6 +22,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import ViewLuidgi.LoginCliente_back;
+import ModelLuidgi.Entregador;
+import javax.swing.JFrame; 
+import javax.swing.SwingUtilities;
+import java.awt.Window;
 
 
 public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements UsuarioLogado{
@@ -85,6 +90,7 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         jButton6 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         labelUsuarioLogado = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -134,7 +140,7 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         });
 
         jButton3.setBackground(new java.awt.Color(255, 193, 7));
-        jButton3.setText("👋 Sair");
+        jButton3.setText("👋 Sair do Aplicativo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -162,6 +168,14 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         labelUsuarioLogado.setOpaque(true);
         labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,14 +183,16 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton12)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,7 +204,8 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
                     .addComponent(jButton3)
                     .addComponent(jButton6)
                     .addComponent(jButton12)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -595,6 +612,30 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         }
     }//GEN-LAST:event_botaoEditarTelefoneActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -612,6 +653,7 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
     private javax.swing.JLabel campoTelefone1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

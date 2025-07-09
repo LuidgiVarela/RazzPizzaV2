@@ -13,6 +13,8 @@ import ModelLuidgi.BancoUsuarios;
 import ModelLuidgi.UsuarioLogado;
 import ModelLuidgi.Usuario;
 import ModelLuidgi.Cliente;
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Entregador;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.awt.Color;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
 
 public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLogado {
     
@@ -127,6 +132,7 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         jButton6 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         labelUsuarioLogado = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,6 +255,14 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         labelUsuarioLogado.setOpaque(true);
         labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
 
+        jButton4.setBackground(new java.awt.Color(255, 0, 0));
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -256,12 +270,14 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton12)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -275,7 +291,8 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
                     .addComponent(jButton3)
                     .addComponent(jButton6)
                     .addComponent(jButton12)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -389,6 +406,30 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         carregarPedidosFalsos(); // recarrega todos os pedidos
     }//GEN-LAST:event_botaoLimparActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // 1. Pega o usuário da sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton4);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +463,7 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

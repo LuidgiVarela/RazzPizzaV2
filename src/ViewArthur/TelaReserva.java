@@ -16,14 +16,21 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 
-
-
-
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
 
 
 public class TelaReserva extends javax.swing.JFrame {
 
+    private Usuario clienteLogado;
+    
     /**
      * Creates new form Reserva
      */
@@ -184,8 +191,25 @@ public class TelaReserva extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    // parte de aparecer o usuário no menu marrom
+    public TelaReserva(Usuario usuario) {
+        this(); // Chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
+    
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
 
-
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+    
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
     }
     
 
@@ -205,6 +229,8 @@ public class TelaReserva extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -257,6 +283,19 @@ public class TelaReserva extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -264,10 +303,14 @@ public class TelaReserva extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 548, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -280,7 +323,9 @@ public class TelaReserva extends javax.swing.JFrame {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton2)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -384,16 +429,16 @@ public class TelaReserva extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 171, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonConfirmarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(689, 689, 689))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(304, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(301, 301, 301)))
+                    .addContainerGap(330, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(258, 258, 258)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,7 +462,7 @@ public class TelaReserva extends javax.swing.JFrame {
                     .addComponent(jTextFieldNumPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(82, 82, 82)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,6 +584,30 @@ if (
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDataActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -576,6 +645,7 @@ if (
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonConfirmarReserva;
     private javax.swing.JButton jButtonConsultarHistorico;
@@ -594,5 +664,6 @@ if (
     private javax.swing.JTextField jTextFieldHorario;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumPessoas;
+    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,16 @@ import ModelArthur.Dinheiro;
 import ModelArthur.Cartao;
 import ViewLuidgi.ConsultaHistorico;
 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -20,6 +30,8 @@ import javax.swing.JOptionPane;
 
 public class TelaPagamento extends javax.swing.JFrame {
 
+    private Usuario clienteLogado;
+    
     /**
      * Creates new form Pagamento
      */
@@ -27,6 +39,26 @@ public class TelaPagamento extends javax.swing.JFrame {
         initComponents();
     }
 
+    // parte de aparecer o usuário no menu marrom
+    public TelaPagamento(Usuario usuario) {
+        this(); // chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
+
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
+
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +73,8 @@ public class TelaPagamento extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -88,6 +122,19 @@ public class TelaPagamento extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,10 +142,14 @@ public class TelaPagamento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 562, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -111,7 +162,9 @@ public class TelaPagamento extends javax.swing.JFrame {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton2)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -187,7 +240,7 @@ public class TelaPagamento extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jLabel1)))
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,6 +368,30 @@ public class TelaPagamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxFormaPagamentoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,6 +429,7 @@ public class TelaPagamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonConsultarHistorico;
     private javax.swing.JButton jButtonConsultarPerfil;
@@ -365,6 +443,7 @@ public class TelaPagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotal1;
     // End of variables declaration//GEN-END:variables

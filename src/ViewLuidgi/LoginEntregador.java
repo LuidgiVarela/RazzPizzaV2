@@ -7,6 +7,7 @@ package ViewLuidgi;
 import ModelLuidgi.Usuario;
 import ModelLuidgi.Entregador;
 import ModelLuidgi.BancoUsuarios;
+import ModelLuidgi.SessaoUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -282,6 +283,10 @@ public class LoginEntregador extends javax.swing.JFrame {
             if (u.getSenha().equals(senhaDigitada)) {
                 if (u instanceof Entregador) {
                     Entregador entregador = (Entregador) u;
+
+                    // Salva o entregador logado na sessão
+                    SessaoUsuario.getInstancia().setUsuarioLogado(entregador);
+
                     JOptionPane.showMessageDialog(null, "Login do entregador realizado com sucesso!");
 
                     ConfirmaCodigo telaCodigo = new ConfirmaCodigo(entregador);
@@ -296,7 +301,7 @@ public class LoginEntregador extends javax.swing.JFrame {
             }
         } else {
             // Usuário não encontrado
-            JOptionPane.showMessageDialog(null, "E-mail não cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "E-mail não cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 

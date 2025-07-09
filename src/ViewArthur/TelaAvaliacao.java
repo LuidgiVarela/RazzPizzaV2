@@ -11,14 +11,23 @@ import javax.swing.text.BadLocationException;
 import ModelArthur.Avaliacao;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
-import ViewLuidgi.ConsultaHistorico;
-import ViewLuidgi.ConsultaPerfilCliente_back;
 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
 
 
 public class TelaAvaliacao extends javax.swing.JFrame {
     private String nomeCliente;
     private String emailCliente;
+    private Usuario clienteLogado;
+
     /**
      * Creates new form TelaFinal
      */
@@ -29,47 +38,65 @@ public class TelaAvaliacao extends javax.swing.JFrame {
          
         setSize(900,800);
         ((AbstractDocument) jTextAreaAvaliacao.getDocument()).setDocumentFilter(new DocumentFilter() {
-        private final int MAX_CHARS = 300;
+            private final int MAX_CHARS = 300;
         
 
-        @Override
-        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            if ((fb.getDocument().getLength() + string.length()) <= MAX_CHARS) {
-                super.insertString(fb, offset, string, attr);
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if ((fb.getDocument().getLength() + string.length()) <= MAX_CHARS) {
+                    super.insertString(fb, offset, string, attr);
+                }
             }
-        }
 
-        @Override
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            int currentLength = fb.getDocument().getLength();
-            int overLimit = (currentLength + text.length()) - MAX_CHARS - length;
-            if (overLimit <= 0) {
-                super.replace(fb, offset, length, text, attrs);
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                int currentLength = fb.getDocument().getLength();
+                int overLimit = (currentLength + text.length()) - MAX_CHARS - length;
+                if (overLimit <= 0) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
             }
-        }
-    });
+        });
 
         jTextAreaAvaliacao.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-         @Override    
-        public void changedUpdate(javax.swing.event.DocumentEvent e) {
-            atualizarContador();
-        }
-         @Override
-        public void removeUpdate(javax.swing.event.DocumentEvent e) {
-            atualizarContador();
-        }
-         @Override
-        public void insertUpdate(javax.swing.event.DocumentEvent e) {
-            atualizarContador();
-        }
+            @Override    
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                atualizarContador();
+            }
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                atualizarContador();
+            }
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                atualizarContador();
+            }
 
-        public void atualizarContador() {
-            int tamanho = jTextAreaAvaliacao.getText().length();
-            jLabelContador.setText(tamanho + "/300");
-        }
-    });
-
+            public void atualizarContador() {
+                int tamanho = jTextAreaAvaliacao.getText().length();
+                jLabelContador.setText(tamanho + "/300");
+            }
+        });
     }
+    
+    public TelaAvaliacao(Usuario usuario) {
+        this(); // chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
+
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
+
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+    
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,11 +107,14 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButtonInicio = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -94,6 +124,14 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaAvaliacao = new javax.swing.JTextArea();
         jLabelContador = new javax.swing.JLabel();
+
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +169,19 @@ public class TelaAvaliacao extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,10 +189,14 @@ public class TelaAvaliacao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -154,7 +209,9 @@ public class TelaAvaliacao extends javax.swing.JFrame {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton3)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -321,6 +378,54 @@ public class TelaAvaliacao extends javax.swing.JFrame {
         this.dispose(); // Fecha a tela de avaliação
     }//GEN-LAST:event_jButtonFinalizarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -360,6 +465,8 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonConsultarHistorico;
     private javax.swing.JButton jButtonConsultarPerfil;
     private javax.swing.JButton jButtonFinalizar;
@@ -374,5 +481,6 @@ public class TelaAvaliacao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaAvaliacao;
+    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

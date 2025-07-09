@@ -18,6 +18,15 @@ import javax.swing.SwingUtilities;
 import ModelArthur.Pagamento;
 import ViewLuidgi.ConsultaHistorico;
 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
 
 
 
@@ -26,6 +35,8 @@ import ViewLuidgi.ConsultaHistorico;
 
 public class TelaCartao extends javax.swing.JFrame {
 
+    private Usuario clienteLogado; 
+    
     /**
      * Creates new form Cartao
      */
@@ -61,7 +72,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 }
             }
         });
-       jTextFieldNomeTitular.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNomeTitular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
             char c = evt.getKeyChar();
             if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
@@ -70,7 +81,7 @@ public class TelaCartao extends javax.swing.JFrame {
                 evt.consume(); // bloqueia se exceder 30 caracteres
             }
         }
-});
+        });
 
 
         // Configuracao Campo Número do TelaCartao
@@ -91,35 +102,34 @@ public class TelaCartao extends javax.swing.JFrame {
                     jTextFieldNumeroCartao.setText("1234 5678 9012 3456");
                 }
             }
-});  
-    jTextFieldNumeroCartao.addKeyListener(new KeyAdapter() {
-    @Override
-    public void keyTyped(KeyEvent e) {
-        String text = jTextFieldNumeroCartao.getText().replace(" ", "");
-        char c = e.getKeyChar();
+        });  
+        jTextFieldNumeroCartao.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String text = jTextFieldNumeroCartao.getText().replace(" ", "");
+                char c = e.getKeyChar();
 
-        // Só permite número e impede ultrapassar 16 dígitos
-        if (!Character.isDigit(c) || text.length() >= 16) {
-            e.consume();
-            return;
-        }
-
-        // Insere espaços automaticamente
-        SwingUtilities.invokeLater(() -> {
-            String raw = jTextFieldNumeroCartao.getText().replace(" ", "") + c;
-            StringBuilder formatted = new StringBuilder();
-            for (int i = 0; i < raw.length(); i++) {
-                if (i > 0 && i % 4 == 0) {
-                    formatted.append(" ");
+                // Só permite número e impede ultrapassar 16 dígitos
+                if (!Character.isDigit(c) || text.length() >= 16) {
+                    e.consume();
+                    return;
                 }
-                formatted.append(raw.charAt(i));
-            }
-            jTextFieldNumeroCartao.setText(formatted.toString());
-        });
 
-        e.consume(); // evita digitação duplicada
-    }
-});
+                // Insere espaços automaticamente
+                SwingUtilities.invokeLater(() -> {
+                    String raw = jTextFieldNumeroCartao.getText().replace(" ", "") + c;
+                    StringBuilder formatted = new StringBuilder();
+                    for (int i = 0; i < raw.length(); i++) {
+                        if (i > 0 && i % 4 == 0) {
+                            formatted.append(" ");
+                        }
+                        formatted.append(raw.charAt(i));
+                    }
+                    jTextFieldNumeroCartao.setText(formatted.toString());
+                });
+                e.consume(); // evita digitação duplicada
+            }
+        });
         // Configuracao Campo Validade
         jTextFieldValidade.setText("MM/AA");
         jTextFieldValidade.setForeground(Color.GRAY);
@@ -138,33 +148,32 @@ public class TelaCartao extends javax.swing.JFrame {
                 }
             }
         });
-    jTextFieldValidade.addKeyListener(new KeyAdapter() {
-    @Override
-    public void keyTyped(KeyEvent e) {
-        String text = jTextFieldValidade.getText().replace("/", "");
-        char c = e.getKeyChar();
+        jTextFieldValidade.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String text = jTextFieldValidade.getText().replace("/", "");
+                char c = e.getKeyChar();
 
-        // Só aceita número e máximo 4 dígitos
-        if (!Character.isDigit(c) || text.length() >= 4) {
-            e.consume();
-            return;
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            String raw = jTextFieldValidade.getText().replace("/", "") + c;
-            StringBuilder formatted = new StringBuilder();
-            for (int i = 0; i < raw.length(); i++) {
-                if (i == 2) {
-                    formatted.append("/");
+                // Só aceita número e máximo 4 dígitos
+                if (!Character.isDigit(c) || text.length() >= 4) {
+                    e.consume();
+                    return;
                 }
-                formatted.append(raw.charAt(i));
-            }
-            jTextFieldValidade.setText(formatted.toString());
-        });
 
-        e.consume();
-    }
-});
+                SwingUtilities.invokeLater(() -> {
+                    String raw = jTextFieldValidade.getText().replace("/", "") + c;
+                    StringBuilder formatted = new StringBuilder();
+                    for (int i = 0; i < raw.length(); i++) {
+                        if (i == 2) {
+                            formatted.append("/");
+                        }
+                        formatted.append(raw.charAt(i));
+                    }
+                    jTextFieldValidade.setText(formatted.toString());
+                });
+                e.consume();
+            }
+        });
         
         // Configuracao Campo CVV
         jTextFieldCVV.setText("123");
@@ -184,8 +193,8 @@ public class TelaCartao extends javax.swing.JFrame {
                 }
             }
             
-});
-       jTextFieldCVV.addKeyListener(new java.awt.event.KeyAdapter() {
+        });
+        jTextFieldCVV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 char c = evt.getKeyChar();
                 String text = jTextFieldCVV.getText();
@@ -194,9 +203,7 @@ public class TelaCartao extends javax.swing.JFrame {
                     evt.consume(); // só permite números e até 3 dígitos
                 }
             }
-});
-
-
+        });
 
     // Agrupamento dos botões "Sim" e "Não"
     ButtonGroup grupoSalvarCartao = new ButtonGroup();
@@ -204,12 +211,26 @@ public class TelaCartao extends javax.swing.JFrame {
     grupoSalvarCartao.add(jRadioButtonNao);
     jRadioButtonSim.setSelected(true);
     
-    
- 
     }
-   
+    
+// parte de aparecer o usuário no menu marrom
+    public TelaCartao(Usuario usuario) {
+        this(); // chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
 
-   
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
+
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+    
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -225,6 +246,8 @@ public class TelaCartao extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -280,6 +303,19 @@ public class TelaCartao extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,10 +323,14 @@ public class TelaCartao extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 628, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -303,7 +343,9 @@ public class TelaCartao extends javax.swing.JFrame {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton2)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -510,7 +552,7 @@ public class TelaCartao extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,9 +603,7 @@ public class TelaCartao extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed
-        
-        
-        
+                
         // Confirmar se os campos estão preenchidos
         String numero = jTextFieldNumeroCartao.getText().replaceAll("[ _]", "");
         String validade = jTextFieldValidade.getText().replaceAll("[ _]", "");
@@ -639,6 +679,30 @@ public class TelaCartao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonNaoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -682,6 +746,7 @@ public class TelaCartao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonConfirmarPagamento;
     private javax.swing.JButton jButtonConsultarHistorico;
     private javax.swing.JButton jButtonConsultarPerfil;
@@ -705,5 +770,6 @@ public class TelaCartao extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNomeTitular;
     private javax.swing.JTextField jTextFieldNumeroCartao;
     private javax.swing.JTextField jTextFieldValidade;
+    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import ViewLuidgi.ConsultaHistorico;
 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
+import ModelLuidgi.SessaoUsuario;
+import ModelLuidgi.Usuario;
+import ModelLuidgi.Cliente;
+import ModelLuidgi.Entregador;
+import ViewLuidgi.LoginCliente_back;
+import ViewLuidgi.LoginEntregador;
+
 
 /**
  *
@@ -18,61 +28,82 @@ import ViewLuidgi.ConsultaHistorico;
  */
 public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
 
+    private Usuario clienteLogado; 
+    
     /**
      * Creates new form TelaAvaliacoesRecebidas
      */
     public TelaAvaliacoesRecebidas() {
         initComponents();
 
-    // Aumenta altura do cabeçalho
-    JTableAvaliacoes.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 30));
+        // Aumenta altura do cabeçalho
+        JTableAvaliacoes.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 30));
 
-    // Altera fonte do cabeçalho
-    JTableAvaliacoes.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+        // Altera fonte do cabeçalho
+        JTableAvaliacoes.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
 
-    // Largura da coluna Email
-    JTableAvaliacoes.getColumnModel().getColumn(2).setPreferredWidth(200);
+        // Largura da coluna Email
+        JTableAvaliacoes.getColumnModel().getColumn(2).setPreferredWidth(200);
 
-    // Simula dados e preenche tabela
-    SistemaAvaliacoes.simularAvaliacoes();
-    preencherTabelaAvaliacoes(SistemaAvaliacoes.getTodasAvaliacoes());
+        // Simula dados e preenche tabela
+        SistemaAvaliacoes.simularAvaliacoes();
+        preencherTabelaAvaliacoes(SistemaAvaliacoes.getTodasAvaliacoes());
 
-    // Clique para ver detalhes
-    JTableAvaliacoes.addMouseListener(new java.awt.event.MouseAdapter() {
-        @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            int linhaSelecionada = JTableAvaliacoes.getSelectedRow();
-            if (linhaSelecionada != -1) {
-                String avaliacaoCompleta = JTableAvaliacoes.getValueAt(linhaSelecionada, 3).toString(); // Coluna da Avaliação
-                String nomeCliente = JTableAvaliacoes.getValueAt(linhaSelecionada, 1).toString(); // Coluna do Cliente
+        // Clique para ver detalhes
+        JTableAvaliacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linhaSelecionada = JTableAvaliacoes.getSelectedRow();
+                if (linhaSelecionada != -1) {
+                    String avaliacaoCompleta = JTableAvaliacoes.getValueAt(linhaSelecionada, 3).toString(); // Coluna da Avaliação
+                    String nomeCliente = JTableAvaliacoes.getValueAt(linhaSelecionada, 1).toString(); // Coluna do Cliente
 
-                JOptionPane.showMessageDialog(
+                    JOptionPane.showMessageDialog(
                     null,
                     "Cliente: " + nomeCliente + "\n\n" + avaliacaoCompleta,
                     "Detalhes da Avaliação",
                     JOptionPane.INFORMATION_MESSAGE
-                );
+                    );
+                }
             }
-        }
-    });
-}
-
-// Método que preenche a tabela com as avaliações
-private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
-    DefaultTableModel modelo = (DefaultTableModel) JTableAvaliacoes.getModel();
-    modelo.setRowCount(0); // Limpa a tabela antes de preencher
-
-    for (Avaliacao a : avaliacoes) {
-        Object[] linha = {
-            a.getData(),
-            a.getNomeCliente(),
-            a.getEmail(),
-            a.getTexto()
-        };
-        modelo.addRow(linha);
+        });
     }
-}
 
+    // Método que preenche a tabela com as avaliações
+    private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
+        DefaultTableModel modelo = (DefaultTableModel) JTableAvaliacoes.getModel();
+        modelo.setRowCount(0); // Limpa a tabela antes de preencher
+
+        for (Avaliacao a : avaliacoes) {
+            Object[] linha = {
+                a.getData(),
+                a.getNomeCliente(),
+                a.getEmail(),
+                a.getTexto()
+            };
+            modelo.addRow(linha);
+        }
+    }
+
+    // parte de aparecer o usuário no menu marrom
+    public TelaAvaliacoesRecebidas(Usuario usuario) {
+        this(); // chama o construtor padrão
+        this.clienteLogado = usuario;
+        setUsuarioLogado(usuario);
+    }
+
+    public void setUsuarioLogado(Usuario usuario) {
+        String nomeCompleto = usuario.getNome();
+        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
+
+        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
+        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
+    }
+    
+    public Usuario getUsuarioLogado() {
+        return this.clienteLogado;
+    }     
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +119,8 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
         jButtonSair = new javax.swing.JButton();
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -135,6 +168,19 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
+        labelUsuarioLogado.setText("Usuário:");
+        labelUsuarioLogado.setOpaque(true);
+        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -142,10 +188,14 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarHistorico)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -158,7 +208,9 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico))
+                    .addComponent(jButtonConsultarHistorico)
+                    .addComponent(jButton2)
+                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -359,6 +411,30 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
         preencherTabelaAvaliacoes(avaliacoes); 
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // 1. Pega o usuário antes de limpar a sessão
+        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+
+        // 2. Limpa a sessão
+        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+
+        // 3. Reabre a tela de login correspondente
+        if (usuario instanceof Cliente) {
+            new LoginCliente_back().setVisible(true);
+        } else if (usuario instanceof Entregador) {
+            new LoginEntregador().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
+            return;
+        }
+
+        // 4. Fecha a janela atual
+        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
+        if (janelaAtual != null) {
+            janelaAtual.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,6 +473,7 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTableAvaliacoes;
     private javax.swing.ButtonGroup buttonGroupOrdenacao;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonConsultarHistorico;
     private javax.swing.JButton jButtonConsultarPerfil;
@@ -411,5 +488,6 @@ private void preencherTabelaAvaliacoes(List<Avaliacao> avaliacoes) {
     private javax.swing.JRadioButton jRadioButtonData;
     private javax.swing.JRadioButton jRadioButtonNome;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

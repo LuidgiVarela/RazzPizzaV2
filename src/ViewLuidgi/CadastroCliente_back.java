@@ -640,7 +640,7 @@ public class CadastroCliente_back extends javax.swing.JFrame {
         }
 
         // 5. Criar e salvar cliente
-        Cliente novo = new Cliente(nome, email, senha, telefone, cep, numero);
+        Cliente novo = new Cliente(nome, email, telefone, cep, senha, numero);
         BancoUsuarios.listaUsuarios.add(novo);
 
         // 6. Mensagem e redirecionamento
