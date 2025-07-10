@@ -15,6 +15,8 @@ import ModelLuidgi.Entregador;
 import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
 
+import ModelNikolle.Pedido;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -29,22 +31,21 @@ import ViewLuidgi.ConsultaPerfilCliente_back;
 import javax.swing.JOptionPane;
 
 public class TelaPagamento extends javax.swing.JFrame {
-
+    private Pedido pedido;
     private Usuario clienteLogado;
     
     /**
      * Creates new form Pagamento
      */
-    public TelaPagamento() {
+    public TelaPagamento(Pedido pedido) {
+        this.pedido = pedido;
         initComponents();
+
+        double total = pedido.calcularTotal(); // chama o método que já existe
+        jLabelValorTotal.setText(String.format("R$ %.2f", total));
     }
 
-    // parte de aparecer o usuário no menu marrom
-    public TelaPagamento(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
+  
 
     public void setUsuarioLogado(Usuario usuario) {
         String nomeCompleto = usuario.getNome();
@@ -82,9 +83,9 @@ public class TelaPagamento extends javax.swing.JFrame {
         jButtonProsseguir = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lblTotal1 = new javax.swing.JLabel();
+        jLabelValorTotal = new javax.swing.JLabel();
         jComboBoxFormaPagamento = new javax.swing.JComboBox<>();
+        jLabelValorTotal1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,11 +199,8 @@ public class TelaPagamento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 48)); // NOI18N
         jLabel1.setText("🛍️ Tela de Pagamento");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
-        jLabel7.setText("🧾 Valor total a pagar:");
-
-        lblTotal1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblTotal1.setText("R$ 0,00");
+        jLabelValorTotal.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        jLabelValorTotal.setText("valor");
 
         jComboBoxFormaPagamento.setBackground(new java.awt.Color(255, 248, 220));
         jComboBoxFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Cartão", "Pix", "Dinheiro" }));
@@ -213,33 +211,35 @@ public class TelaPagamento extends javax.swing.JFrame {
             }
         });
 
+        jLabelValorTotal1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        jLabelValorTotal1.setText("🧾 Valor total a pagar:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButtonProsseguir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabelValorTotal1))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jButtonProsseguir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(27, 27, 27)
                                 .addComponent(jComboBoxFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(58, 58, 58)
-                                .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel1)))
+                            .addComponent(jLabelValorTotal))))
                 .addContainerGap(327, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -247,11 +247,11 @@ public class TelaPagamento extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addGap(110, 110, 110)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(jLabelValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,11 +350,11 @@ public class TelaPagamento extends javax.swing.JFrame {
 
         // abrir a próxima tela conforme a forma de pagamento
         if (formaPagamento.equals("Cartão")) {
-            new TelaCartao().setVisible(true);
+            new TelaCartao(pedido).setVisible(true);
         } else if (formaPagamento.equals("Pix")) {
-            new TelaPix(valorFinal).setVisible(true);
+            new TelaPix(pedido).setVisible(true);
         } else if (formaPagamento.equals("Dinheiro")) {
-            new TelaDinheiro().setVisible(true);
+            new TelaDinheiro(pedido).setVisible(true);
         }
 
         dispose(); // fecha a tela atual
@@ -362,6 +362,7 @@ public class TelaPagamento extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBoxFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormaPagamentoActionPerformed
@@ -421,11 +422,11 @@ public class TelaPagamento extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaPagamento().setVisible(true);
-            }
-        });
+    //   java.awt.EventQueue.invokeLater(new Runnable() {
+    //        public void run() {
+    //           new TelaPagamento().setVisible(true);
+    //        }
+    //    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -440,11 +441,11 @@ public class TelaPagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelValorTotal;
+    private javax.swing.JLabel jLabelValorTotal1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblTotal1;
     // End of variables declaration//GEN-END:variables
 }

@@ -306,8 +306,8 @@ public class PedidoSobre extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         this.dispose();
-        TelaPagamento telapag = new TelaPagamento();
-        telapag.setVisible(true);
+        TelaPagamento telaPag = new TelaPagamento(pedido);
+        telaPag.setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

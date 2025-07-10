@@ -170,8 +170,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
-                          <Component id="jButtonDelivery" min="-2" pref="176" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                          <Component id="jButtonDelivery" min="-2" pref="257" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                           <Component id="jButtonAgendarReserva" min="-2" pref="333" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">

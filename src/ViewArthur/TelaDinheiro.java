@@ -31,17 +31,22 @@ import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
 
 
-public class TelaDinheiro extends javax.swing.JFrame {
+import ModelNikolle.Pedido;
 
+
+public class TelaDinheiro extends javax.swing.JFrame {
+    private Pedido pedido;
     private Usuario clienteLogado;
     
     /**
      * Creates new form Dinheiro
      */
-    public TelaDinheiro(double valorOriginal) {
+    public TelaDinheiro(Pedido pedido) {
+        this.pedido = pedido;
         initComponents();
 
         // Aplica o desconto de 10% via classe Dinheiro 
+        double valorOriginal = pedido.calcularTotal();
         Dinheiro pagamento = new Dinheiro(valorOriginal);
         double valorComDesconto = pagamento.calcularValorFinal();
 
@@ -78,16 +83,8 @@ public class TelaDinheiro extends javax.swing.JFrame {
     }
 
     // Construtor padrão para testes (sem valor)
-    public TelaDinheiro() {
-        this(0.0);
-    }
+ 
 
-    // parte de aparecer o usuário no menu marrom
-    public TelaDinheiro(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
 
     public void setUsuarioLogado(Usuario usuario) {
         String nomeCompleto = usuario.getNome();
@@ -359,7 +356,8 @@ public class TelaDinheiro extends javax.swing.JFrame {
 
     private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed
         // TODO add your handling code here:
-        Pagamento pagamento = new Dinheiro(100.00); // Instância da subclasse Dinheiro
+        double valorTotal = pedido.calcularTotal();
+        Pagamento pagamento = new Dinheiro(valorTotal);
         pagamento.confirmarPagamento();      // Chama o método sobrescrito com JOptionPane
         
         Cliente cliente = (Cliente) SessaoUsuario.getInstancia().getUsuarioLogado();
@@ -371,7 +369,7 @@ public class TelaDinheiro extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        TelaPagamento pagamento = new TelaPagamento();
+        TelaPagamento pagamento = new TelaPagamento(pedido);
         pagamento.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
@@ -438,11 +436,11 @@ public class TelaDinheiro extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaDinheiro().setVisible(true);
-            }
-        });
+    //    java.awt.EventQueue.invokeLater(new Runnable() {
+    //        public void run() {
+    //            new TelaDinheiro().setVisible(true);
+    //        }
+    //    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

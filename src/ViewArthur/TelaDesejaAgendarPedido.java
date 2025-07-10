@@ -294,7 +294,7 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonAgendarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarPedidoActionPerformed
-        TelaDesejaAgendarPedido tela = new TelaDesejaAgendarPedido(clienteLogado);
+        TelaDesejaAgendarPedido tela = new TelaDesejaAgendarPedido(); // construtor sem argumentos
         tela.setVisible(true);
         dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonAgendarPedidoActionPerformed

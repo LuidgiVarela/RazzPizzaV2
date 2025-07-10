@@ -17,6 +17,8 @@ import ModelLuidgi.Entregador;
 import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
 
+import ModelNikolle.Pedido;
+
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
@@ -30,13 +32,14 @@ import java.awt.Window;
 
 
 public class TelaCartao extends javax.swing.JFrame {
-    
+    private Pedido pedido;
     private Usuario clienteLogado; 
     
     /**
      * Creates new form Cartao
      */
-    public TelaCartao() {
+    public TelaCartao(Pedido pedido) {
+        this.pedido = pedido;
         initComponents();
          
 
@@ -636,7 +639,8 @@ public class TelaCartao extends javax.swing.JFrame {
 
 
         // Realiza o pagamento fictício
-        Pagamento pagamento = new Cartao(100.0); // Valor de exemplo
+        double valorTotal = pedido.calcularTotal();
+        Pagamento pagamento = new Cartao(valorTotal);
         pagamento.confirmarPagamento();         // Apenas mostra o JOptionPane
        
 
@@ -663,7 +667,7 @@ public class TelaCartao extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        TelaPagamento pagamento = new TelaPagamento();
+        TelaPagamento pagamento = new TelaPagamento(pedido);
         pagamento.setVisible(true);
         this.dispose(); // Fecha a tela atual (TelaCartao)
 
@@ -758,11 +762,11 @@ public class TelaCartao extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCartao().setVisible(true);
-            }
-        });
+     //   java.awt.EventQueue.invokeLater(new Runnable() {
+     //       public void run() {
+     //           new TelaCartao().setVisible(true);
+     //       }
+     //   });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

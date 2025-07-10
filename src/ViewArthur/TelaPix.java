@@ -18,49 +18,29 @@ import ViewLuidgi.ConsultaPerfilCliente_back;
 import ModelLuidgi.Cliente;
 import ModelLuidgi.SessaoUsuario;
 
+import ModelNikolle.Pedido;
 /**
  * @author arthu
  */
 
 public class TelaPix extends javax.swing.JFrame {
-
-    private Usuario clienteLogado;
+    private Pedido pedido;
     
     /**
      * Creates new form Pix
      */
-    public TelaPix(double valorOriginal) {
+    public TelaPix(Pedido pedido) {
+        this.pedido = pedido;
         initComponents();
 
-        Pix pagamento = new Pix(valorOriginal);
+        Pix pagamento = new Pix(pedido.calcularTotal());
         double valorFinal = pagamento.calcularValorFinal();
 
         String texto = String.format("Total a pagar: R$%.2f (15%% de desconto)", valorFinal);
         jLabelValor.setText(texto);
     }
    
-    public TelaPix() {
-        this(0.0); // valor padrão
-    }
-
-    // parte de aparecer o usuário no menu marrom
-    public TelaPix(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
-
-    public void setUsuarioLogado(Usuario usuario) {
-        String nomeCompleto = usuario.getNome();
-        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
-
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
-    }
-
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }
+  
 
 
     /**
@@ -308,7 +288,8 @@ public class TelaPix extends javax.swing.JFrame {
     private void jButtonConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarPagamentoActionPerformed
         // TODO add your handling code here:
         
-        Pagamento pagamento = new Pix(100.0); // Instância da subclasse Pix
+        double valorTotal = pedido.calcularTotal();
+        Pagamento pagamento = new Pix(valorTotal);
         pagamento.confirmarPagamento(); // Chama o método sobrescrito com JOptionPane
         
         Cliente cliente = (Cliente) SessaoUsuario.getInstancia().getUsuarioLogado();
@@ -319,8 +300,7 @@ public class TelaPix extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        TelaPagamento pagamento = new TelaPagamento();
-        pagamento.setVisible(true);
+        new TelaPagamento(pedido).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
@@ -386,11 +366,11 @@ public class TelaPix extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaPix().setVisible(true);
-            }
-        });
+    //    java.awt.EventQueue.invokeLater(new Runnable() {
+    //        public void run() {
+    //            new TelaPix().setVisible(true);
+    //        }
+    //    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

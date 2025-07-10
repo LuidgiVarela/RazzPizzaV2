@@ -21,13 +21,13 @@ import ModelArthur.SistemaAvaliacoes;
 import ModelArthur.Avaliacao;
 import ViewArthur.TelaPagamento;
 
-
+import ModelNikolle.Pedido;
 /**
  *
  * @author luidgivarela
  */
 public class PedidosPendentes extends javax.swing.JFrame {
-    
+    private Pedido pedido;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidosPendentes.class.getName());
     private Entregador entregadorLogado;
 
@@ -36,8 +36,8 @@ public class PedidosPendentes extends javax.swing.JFrame {
      * Creates new form PedidosPendentes
      */
     public PedidosPendentes() {
+        this.pedido = pedido;
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);  
         
         DefaultTableModel model = (DefaultTableModel) JTableAvaliacoes.getModel();
@@ -372,7 +372,7 @@ public class PedidosPendentes extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-        TelaPagamento pagamento = new TelaPagamento();
+        TelaPagamento pagamento = new TelaPagamento(pedido);
         pagamento.setVisible(true);
         this.dispose(); // Fecha a tela atual (TelaCartao)
     }//GEN-LAST:event_jButtonVoltarActionPerformed
