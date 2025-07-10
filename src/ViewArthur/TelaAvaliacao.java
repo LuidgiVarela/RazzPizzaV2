@@ -33,6 +33,7 @@ import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
 
 
+
 public class TelaAvaliacao extends javax.swing.JFrame {
 
     private Cliente clienteLogado;
@@ -413,7 +414,7 @@ public class TelaAvaliacao extends javax.swing.JFrame {
             SistemaAvaliacoes.adicionarAvaliacao(avaliacao);
 
             JOptionPane.showMessageDialog(this, "✅ Obrigado pela avaliação!");
-            this.dispose();
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "❗ Digite algo para avaliar.");
         }

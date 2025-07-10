@@ -43,7 +43,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         initComponents();
         preencherDados();
         setUsuarioLogado(cliente);
-        setSize(900, 800);
         setLocationRelativeTo(null);
     }
 

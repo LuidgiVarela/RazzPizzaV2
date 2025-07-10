@@ -19,7 +19,6 @@ public class LoginAdministrador extends javax.swing.JFrame {
      */
     public LoginAdministrador() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
     }
 

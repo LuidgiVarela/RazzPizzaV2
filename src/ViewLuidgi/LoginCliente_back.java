@@ -30,7 +30,6 @@ public class LoginCliente_back extends javax.swing.JFrame {
     
     public LoginCliente_back() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
         
         // Placeholder para campoEmail

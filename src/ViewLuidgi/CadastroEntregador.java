@@ -29,7 +29,6 @@ public class CadastroEntregador extends javax.swing.JFrame {
      */
     public CadastroEntregador() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);
 
         // formatação para o número de telefone

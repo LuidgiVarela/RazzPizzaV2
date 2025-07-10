@@ -23,7 +23,6 @@ public class LoginEntregador extends javax.swing.JFrame {
      */
     public LoginEntregador() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
     }
 

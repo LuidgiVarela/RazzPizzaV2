@@ -25,7 +25,6 @@ public class SplashScreen extends javax.swing.JFrame {
     
     public SplashScreen() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
         carregarBarra();
         

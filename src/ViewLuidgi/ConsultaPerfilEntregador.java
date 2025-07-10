@@ -27,7 +27,6 @@ public class ConsultaPerfilEntregador extends javax.swing.JFrame implements Usua
         this.entregador = entregador;        
         initComponents(); 
         setUsuarioLogado(entregador); 
-        setSize(900, 800);
         setLocationRelativeTo(null);
     }
 

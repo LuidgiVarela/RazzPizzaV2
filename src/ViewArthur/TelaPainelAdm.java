@@ -15,6 +15,7 @@ import ModelLuidgi.Cliente;
 import ModelLuidgi.Entregador;
 import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
+import ViewLuidgi.ListaUsuarios; 
 
 /**
  *
@@ -293,6 +294,9 @@ public class TelaPainelAdm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        ListaUsuarios lista = new ListaUsuarios();  
+        lista.setVisible(true);
+        this.dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonAcessarAvaliacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessarAvaliacoesActionPerformed

@@ -32,7 +32,6 @@ public class CadastroCliente_back extends javax.swing.JFrame {
         initComponents();
         jButton1.setBackground(new java.awt.Color(255, 204, 0)); // amarelo
         jButton1.setForeground(java.awt.Color.BLACK); // texto preto
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
         
         ((AbstractDocument) campoNumResidencia.getDocument()).setDocumentFilter(new NumerosLimitadosFilter(5));

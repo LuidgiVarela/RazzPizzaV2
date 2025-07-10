@@ -66,7 +66,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
     
     public ConsultaHistorico() {
         initComponents();
-        setSize(900, 800);
         setLocationRelativeTo(null);    // centraliza na tela
         carregarPedidosFalsos();
         

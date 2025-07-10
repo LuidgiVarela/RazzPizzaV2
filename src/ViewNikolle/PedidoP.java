@@ -7,9 +7,9 @@ import ModelLuidgi.Usuario;
 
 public class PedidoP extends javax.swing.JFrame {
 
-    private final Cardapio cardapio;
+    private Cardapio cardapio;
     private final Pedido pedido = new Pedido();
-    private final Usuario cliente;
+    private  Usuario cliente;
     
     public PedidoP(Usuario usuario) {
         initComponents();
@@ -57,8 +57,8 @@ public class PedidoP extends javax.swing.JFrame {
             }
     }
 
-    private PedidoP() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public PedidoP() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     /**
      * This method is called from within the constructor to initialize the form.
