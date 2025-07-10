@@ -110,8 +110,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         String nomeCompleto = usuario.getNome();
         String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
 
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
     }
 
     @Override
@@ -142,7 +140,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -274,11 +271,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         jButton4.setBackground(new java.awt.Color(255, 0, 0));
         jButton4.setText("Logout");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -299,8 +291,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,7 +305,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
                     .addComponent(jButton3)
                     .addComponent(jButton6)
                     .addComponent(jButton12)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
@@ -501,7 +490,6 @@ public class ConsultaHistorico extends javax.swing.JFrame implements UsuarioLoga
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JList<String> listaPedidos;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,25 +35,6 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
     public TelaDesejaAgendarPedido() {
         initComponents();
     }
-
-    // parte de aparecer o usuário no menu marrom
-    public TelaDesejaAgendarPedido(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
-
-    public void setUsuarioLogado(Usuario usuario) {
-        String nomeCompleto = usuario.getNome();
-        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
-
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
-    }
-    
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,7 +51,6 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -123,11 +103,6 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -140,8 +115,6 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
@@ -156,8 +129,7 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
                     .addComponent(jButtonConsultarHistorico)
-                    .addComponent(jButton2)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -294,7 +266,7 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
 
     private void jButtonAgendarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarPedidoActionPerformed
-        TelaDesejaAgendarPedido tela = new TelaDesejaAgendarPedido(clienteLogado);
+        TelaDesejaAgendarPedido tela = new TelaDesejaAgendarPedido();
         tela.setVisible(true);
         dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonAgendarPedidoActionPerformed
@@ -380,6 +352,5 @@ public class TelaDesejaAgendarPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

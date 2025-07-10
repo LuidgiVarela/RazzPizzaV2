@@ -8,6 +8,8 @@ import ModelArthur.SimuladorDeDados;
 import ViewLuidgi.ConsultaHistorico;
 import ViewLuidgi.ConsultaPerfilCliente_back;
 import ModelLuidgi.Cliente;
+import ModelLuidgi.Administrador;
+import ViewLuidgi.LoginAdministrador;
 
 
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 import java.awt.Window;
 import javax.swing.SwingUtilities;
+import java.awt.Component;
 
 import ModelLuidgi.SessaoUsuario;
 import ModelLuidgi.Usuario;
@@ -89,26 +92,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         };
             modelo.addRow(linha);
         }
-}
-
-    // parte de aparecer o usuário no menu marrom
-    public TelaAvaliacoesRecebidas(Usuario usuario) {
-        this(); // chama o construtor padrão
-        this.clienteLogado = usuario;
-        setUsuarioLogado(usuario);
-    }
-
-    public void setUsuarioLogado(Usuario usuario) {
-        String nomeCompleto = usuario.getNome();
-        String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
-
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
-    }
-    
-    public Usuario getUsuarioLogado() {
-        return this.clienteLogado;
-    }     
+} 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,10 +107,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonInicio = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
-        jButtonConsultarPerfil = new javax.swing.JButton();
-        jButtonConsultarHistorico = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -158,22 +139,6 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             }
         });
 
-        jButtonConsultarPerfil.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonConsultarPerfil.setText("👤Consulte Seu Perfil");
-        jButtonConsultarPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarPerfilActionPerformed(evt);
-            }
-        });
-
-        jButtonConsultarHistorico.setBackground(new java.awt.Color(255, 193, 7));
-        jButtonConsultarHistorico.setText("🕓 Consulte seu Histórico");
-        jButtonConsultarHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarHistoricoActionPerformed(evt);
-            }
-        });
-
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Logout");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -182,11 +147,6 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -194,13 +154,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonInicio)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConsultarHistorico)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConsultarPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
@@ -213,10 +167,7 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
-                    .addComponent(jButtonConsultarPerfil)
-                    .addComponent(jButtonConsultarHistorico)
-                    .addComponent(jButton2)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -377,26 +328,6 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private void jButtonConsultarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarPerfilActionPerformed
-        // TODO add your handling code here:
-
-        /*código consulte seu perfil:
-        ConsultaPerfil_back telaPerfil = new ConsultaPerfil_back();
-        telaPerfil.setVisible(true);
-        dispose(); // opcional
-        */
-
-    }//GEN-LAST:event_jButtonConsultarPerfilActionPerformed
-
-    private void jButtonConsultarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarHistoricoActionPerformed
-        // TODO add your handling code here:
-        
-        ConsultaHistorico telaHistorico = new ConsultaHistorico();
-        telaHistorico.setVisible(true);
-        this.dispose(); // Fecha a tela atual
-        
-    }//GEN-LAST:event_jButtonConsultarHistoricoActionPerformed
-
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
         new TelaPainelAdm().setVisible(true);
@@ -417,27 +348,29 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // 1. Pega o usuário antes de limpar a sessão
-        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
+       // 1. Pega o usuário antes de limpar a sessão
+       Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
 
-        // 2. Limpa a sessão
-        SessaoUsuario.getInstancia().setUsuarioLogado(null);
+       // 2. Limpa a sessão
+       SessaoUsuario.getInstancia().setUsuarioLogado(null);
 
-        // 3. Reabre a tela de login correspondente
-        if (usuario instanceof Cliente) {
-            new LoginCliente_back().setVisible(true);
-        } else if (usuario instanceof Entregador) {
-            new LoginEntregador().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
-            return;
-        }
+       // 3. Reabre a tela de login correspondente
+       if (usuario instanceof Cliente) {
+           new LoginCliente_back().setVisible(true);
+       } else if (usuario instanceof Entregador) {
+           new LoginEntregador().setVisible(true);
+       } else if (usuario instanceof Administrador) {
+           new LoginAdministrador().setVisible(true);
+       } else {
+           JOptionPane.showMessageDialog(null, "Tipo de usuário não reconhecido.");
+           return;
+       }
 
-        // 4. Fecha a janela atual
-        Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
-        if (janelaAtual != null) {
-            janelaAtual.dispose();
-        }
+       // 4. Fecha a janela atual
+       Window janelaAtual = SwingUtilities.getWindowAncestor((Component) evt.getSource());
+       if (janelaAtual != null) {
+           janelaAtual.dispose();
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -484,8 +417,6 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupOrdenacao;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAtualizar;
-    private javax.swing.JButton jButtonConsultarHistorico;
-    private javax.swing.JButton jButtonConsultarPerfil;
     private javax.swing.JButton jButtonInicio;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonVoltar;
@@ -497,6 +428,5 @@ public class TelaAvaliacoesRecebidas extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonData;
     private javax.swing.JRadioButton jRadioButtonNome;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

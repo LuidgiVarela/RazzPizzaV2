@@ -44,8 +44,6 @@ public class TelaModalidades extends javax.swing.JFrame {
         String nomeCompleto = usuario.getNome();
         String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
 
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
     }
     
     public Usuario getUsuarioLogado() {
@@ -69,7 +67,6 @@ public class TelaModalidades extends javax.swing.JFrame {
         jButtonConsultarPerfil = new javax.swing.JButton();
         jButtonConsultarHistorico = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -122,11 +119,6 @@ public class TelaModalidades extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -139,8 +131,6 @@ public class TelaModalidades extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConsultarPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
@@ -155,8 +145,7 @@ public class TelaModalidades extends javax.swing.JFrame {
                     .addComponent(jButtonSair)
                     .addComponent(jButtonConsultarPerfil)
                     .addComponent(jButtonConsultarHistorico)
-                    .addComponent(jButton2)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -289,7 +278,7 @@ public class TelaModalidades extends javax.swing.JFrame {
     private void jButtonAgendarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgendarReservaActionPerformed
         // TODO add your handling code here:
         // Cria uma nova instância da TelaReserva, passando o cliente logado como parâmetro
-        TelaReserva reserva = new TelaReserva(clienteLogado);
+        TelaReserva reserva = new TelaReserva(); 
 
         // Exibe a nova tela
         reserva.setVisible(true);
@@ -388,6 +377,5 @@ public class TelaModalidades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

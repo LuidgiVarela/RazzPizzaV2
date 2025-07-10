@@ -21,7 +21,7 @@ import java.util.Comparator;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.Window;
-
+import java.time.LocalDate;
 
 /**
  *
@@ -31,6 +31,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ListaUsuarios.class.getName());
 
+    
     /**
      * Creates new form ListaUsuarios
      */
@@ -39,7 +40,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
         setSize(900, 800);
         setLocationRelativeTo(null);
     }
-
+    
     private void preencherTabelaUsuarios() {
         DefaultTableModel modelo = (DefaultTableModel) JTableListaUsuarios.getModel(); // troque "suaTabela" pelo nome real
         modelo.setRowCount(0); // limpa a tabela
@@ -67,14 +68,13 @@ public class ListaUsuarios extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jRadioButtonNome = new javax.swing.JRadioButton();
-        jRadioButtonData = new javax.swing.JRadioButton();
+        jRadioButtonTipoUsuario = new javax.swing.JRadioButton();
         jButtonVoltar = new javax.swing.JButton();
         jButtonAtualizar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -109,11 +109,6 @@ public class ListaUsuarios extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Adm:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Logout");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +127,6 @@ public class ListaUsuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,7 +140,6 @@ public class ListaUsuarios extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3)
                     .addComponent(jButton6)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
@@ -164,9 +156,19 @@ public class ListaUsuarios extends javax.swing.JFrame {
 
         jRadioButtonNome.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jRadioButtonNome.setText(" Nome (ordem alfabética)");
+        jRadioButtonNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonNomeActionPerformed(evt);
+            }
+        });
 
-        jRadioButtonData.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jRadioButtonData.setText("Data (recente)");
+        jRadioButtonTipoUsuario.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        jRadioButtonTipoUsuario.setText("Tipo de Usuário");
+        jRadioButtonTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         jButtonVoltar.setBackground(new java.awt.Color(255, 193, 7));
         jButtonVoltar.setText("↩ Voltar");
@@ -223,7 +225,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButtonNome)
                         .addGap(126, 126, 126)
-                        .addComponent(jRadioButtonData)
+                        .addComponent(jRadioButtonTipoUsuario)
                         .addGap(131, 131, 131))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -254,7 +256,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonNome)
-                    .addComponent(jRadioButtonData))
+                    .addComponent(jRadioButtonTipoUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
@@ -346,39 +348,48 @@ public class ListaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-        TelaPainelAdm painelAdm = new TelaPainelAdm();
-        painelAdm.setVisible(true);
-        this.dispose(); // Fecha a tela atual (ListaUsuarios)
+        TelaPainelAdm telaAnterior = new TelaPainelAdm();
+        telaAnterior.setVisible(true);
+        dispose(); // Fecha a tela atual (ListaUsuarios)
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         DefaultTableModel model = (DefaultTableModel) JTableListaUsuarios.getModel();
+        model.setRowCount(0); // limpa a tabela
 
-        // Recolhe os dados da tabela
-        List<Object[]> linhas = new ArrayList<>();
-        for (int i = 0; i < model.getRowCount(); i++) {
-            Object[] linha = {
-                model.getValueAt(i, 0), // Cliente
-                model.getValueAt(i, 1), // Pedido
-                model.getValueAt(i, 2), // Endereço
-                model.getValueAt(i, 3)  // Data
-            };
-            linhas.add(linha);
-        }
+        ArrayList<Usuario> lista = BancoUsuarios.getListaUsuarios();
 
         // Ordena conforme o botão selecionado
         if (jRadioButtonNome.isSelected()) {
-            linhas.sort(Comparator.comparing(l -> l[0].toString())); // Ordenar por nome (coluna 0)
-        } else if (jRadioButtonData.isSelected()) {
-            linhas.sort((l1, l2) -> l2[3].toString().compareTo(l1[3].toString())); // Ordenar por data (coluna 3), decrescente
+            lista.sort(Comparator.comparing(u -> u.getNome().toLowerCase()));
+        } else if (jRadioButtonTipoUsuario.isSelected()) {
+            lista.sort(Comparator.comparing(u -> {
+                if (u instanceof Cliente) return "Cliente";
+                else if (u instanceof Entregador) return "Entregador";
+                else return "Outro";
+            }));
+        } else if (jRadioButtonTipoUsuario.isSelected()) {
+            lista.sort((u1, u2) -> {
+                LocalDate d1 = (u1 instanceof Cliente) ? ((Cliente) u1).getDataCadastro() : LocalDate.MIN;
+                LocalDate d2 = (u2 instanceof Cliente) ? ((Cliente) u2).getDataCadastro() : LocalDate.MIN;
+                return d2.compareTo(d1); // mais recente primeiro
+            });
         }
 
-        // Limpa e reinsere as linhas ordenadas
-        model.setRowCount(0);
-        for (Object[] linha : linhas) {
-            model.addRow(linha);
+        // Preenche a tabela
+        for (Usuario u : lista) {
+            String tipo = (u instanceof Cliente) ? "Cliente" : (u instanceof Entregador) ? "Entregador" : "Outro";
+            model.addRow(new Object[]{tipo, u.getNome(), u.getEmail()});
         }
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jRadioButtonTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonTipoUsuarioActionPerformed
+
+    private void jRadioButtonNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,9 +429,8 @@ public class ListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButtonData;
     private javax.swing.JRadioButton jRadioButtonNome;
+    private javax.swing.JRadioButton jRadioButtonTipoUsuario;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

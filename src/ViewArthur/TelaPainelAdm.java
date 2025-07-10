@@ -2,8 +2,6 @@
 package ViewArthur;
 
 import javax.swing.JOptionPane;
-
-
 import java.awt.Window;
 import javax.swing.SwingUtilities;
 
@@ -15,12 +13,17 @@ import ModelLuidgi.Cliente;
 import ModelLuidgi.Entregador;
 import ViewLuidgi.LoginCliente_back;
 import ViewLuidgi.LoginEntregador;
+import ViewLuidgi.LoginAdministrador;
+import ViewLuidgi.ListaUsuarios;
+
 
 /**
  *
  * @author arthu
  */
 public class TelaPainelAdm extends javax.swing.JFrame {
+    
+    private String nomeAdm;
     
     /**
      * Creates new form TelaPainelAdm
@@ -29,6 +32,11 @@ public class TelaPainelAdm extends javax.swing.JFrame {
         initComponents();
     }
 
+    public TelaPainelAdm(String nomeAdm) {
+        initComponents();
+        this.nomeAdm = nomeAdm;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +50,6 @@ public class TelaPainelAdm extends javax.swing.JFrame {
         jButtonInicio = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
@@ -82,11 +89,6 @@ public class TelaPainelAdm extends javax.swing.JFrame {
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Adm:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,8 +97,6 @@ public class TelaPainelAdm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButtonInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSair)
@@ -109,8 +109,7 @@ public class TelaPainelAdm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInicio)
                     .addComponent(jButtonSair)
-                    .addComponent(jButton2)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -186,7 +185,7 @@ public class TelaPainelAdm extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(55, 55, 55)))
                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(88, 88, 88)
@@ -262,23 +261,14 @@ public class TelaPainelAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // 1. Pega o usuário antes de limpar a sessão
-        Usuario usuario = SessaoUsuario.getInstancia().getUsuarioLogado();
-
-        // 2. Limpa a sessão
+        // Limpa a sessão, se necessário (caso você use SessaoUsuario ainda)
         SessaoUsuario.getInstancia().setUsuarioLogado(null);
 
-        // 3. Reabre a tela de login correspondente
-        if (usuario instanceof Cliente) {
-            new LoginCliente_back().setVisible(true);
-        } else if (usuario instanceof Entregador) {
-            new LoginEntregador().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Tipo de usuário desconhecido.");
-            return;
-        }
+        // Volta para a tela de login de administrador
+        LoginAdministrador loginAdm = new LoginAdministrador();
+        loginAdm.setVisible(true);
 
-        // 4. Fecha a janela atual
+        // Fecha a tela atual
         Window janelaAtual = SwingUtilities.getWindowAncestor(jButton2);
         if (janelaAtual != null) {
             janelaAtual.dispose();
@@ -292,14 +282,15 @@ public class TelaPainelAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ListaUsuarios tela = new ListaUsuarios();
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonAcessarAvaliacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcessarAvaliacoesActionPerformed
-        // TODO add your handling code here:
-        new TelaAvaliacoesRecebidas().setVisible(true);
+        TelaAvaliacoesRecebidas tela = new TelaAvaliacoesRecebidas();
+        tela.setVisible(true);
         dispose();
-        
     }//GEN-LAST:event_jButtonAcessarAvaliacoesActionPerformed
 
     /**
@@ -351,7 +342,6 @@ public class TelaPainelAdm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JLabel lblTotal;
     // End of variables declaration//GEN-END:variables
 }

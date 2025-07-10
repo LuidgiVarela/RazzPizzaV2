@@ -52,8 +52,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         String nomeCompleto = cliente.getNome();
         String nomeCurto = nomeCompleto.length() > 18 ? nomeCompleto.substring(0, 18) + "..." : nomeCompleto;
 
-        labelUsuarioLogado.setText("Usuário: " + nomeCurto);
-        labelUsuarioLogado.setToolTipText("Usuário: " + nomeCompleto);
     }
 
     @Override
@@ -89,7 +87,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        labelUsuarioLogado = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -163,11 +160,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
             }
         });
 
-        labelUsuarioLogado.setBackground(new java.awt.Color(255, 193, 7));
-        labelUsuarioLogado.setText("Usuário:");
-        labelUsuarioLogado.setOpaque(true);
-        labelUsuarioLogado.setPreferredSize(new java.awt.Dimension(156, 23));
-
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setText("Logout");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -188,8 +180,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
@@ -204,7 +194,6 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
                     .addComponent(jButton3)
                     .addComponent(jButton6)
                     .addComponent(jButton12)
-                    .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
@@ -670,6 +659,5 @@ public class ConsultaPerfilCliente_back extends javax.swing.JFrame implements Us
     private javax.swing.JLabel labelNumResidencia;
     private javax.swing.JLabel labelTelefone;
     private javax.swing.JLabel labelTelefone1;
-    private javax.swing.JLabel labelUsuarioLogado;
     // End of variables declaration//GEN-END:variables
 }

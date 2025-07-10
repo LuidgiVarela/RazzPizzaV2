@@ -222,18 +222,27 @@ public class LoginAdministrador extends javax.swing.JFrame {
         }
 
         // Lista de administradores fixos
-        boolean loginValido = 
+        boolean loginValido = (
             (emailDigitado.equals("luidgi@gmail.com") && senhaDigitada.equals("231011669")) ||
             (emailDigitado.equals("arthur@gmail.com") && senhaDigitada.equals("221037385")) ||
-            (emailDigitado.equals("nikolle@gmail.com") && senhaDigitada.equals("241020812"));
+            (emailDigitado.equals("nikole@gmail.com") && senhaDigitada.equals("241020812"))
+        );
+
+        String nomeAdm = "";
+        if (emailDigitado.equals("luidgi@gmail.com")) {
+            nomeAdm = "Luidgi";
+        } else if (emailDigitado.equals("arthur@gmail.com")) {
+            nomeAdm = "Arthur";
+        } else if (emailDigitado.equals("nikole@gmail.com")) {
+            nomeAdm = "Nikole";
+        }
 
         if (loginValido) {
             JOptionPane.showMessageDialog(null, "Login de administrador realizado com sucesso!");
-            TelaPainelAdm tela = new TelaPainelAdm();
+            TelaPainelAdm tela = new TelaPainelAdm(nomeAdm); // Passa o nome para o painel
             tela.setVisible(true);
             tela.setLocationRelativeTo(null);
-            dispose(); 
-            
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.");
         }
