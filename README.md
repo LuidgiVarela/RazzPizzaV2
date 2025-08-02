@@ -1,4 +1,4 @@
-# RazzPizzaV2 🍕
+# RazzPizza 🍕
 
 Sistema de gerenciamento de pizzaria com interface gráfica, desenvolvido em Java.
 
