@@ -4,7 +4,7 @@ Sistema de gerenciamento de pizzaria com interface gráfica, desenvolvido em Jav
 
 ## 📋 Descrição
 
-O **RazzPizzaV2** é um sistema desktop criado para simular o funcionamento de uma pizzaria. O projeto permite que clientes façam pedidos, avaliem os serviços, e que administradores e entregadores gerenciem as operações da pizzaria. Possui estrutura orientada a objetos e interface gráfica interativa.
+O **RazzPizza** é um sistema desktop criado para simular o funcionamento de uma pizzaria. O projeto permite que clientes façam pedidos, avaliem os serviços, e que administradores e entregadores gerenciem as operações da pizzaria. Possui estrutura orientada a objetos e interface gráfica interativa.
 
 ## 🚀 Funcionalidades principais
 
