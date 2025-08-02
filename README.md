@@ -44,8 +44,8 @@ src/
    - Utilize uma IDE como **NetBeans** ou **IntelliJ IDEA**
    - Ou compile manualmente via terminal:
      ```bash
-     javac -d build/classes src/**/*.java
-     java -cp build/classes MainClass  # Substitua "MainClass" pela classe principal do projeto
+         javac -d build/classes src/**/*.java
+         java -cp build/classes razzpizzav3.RazzPizzaV3
      ```
 
 
